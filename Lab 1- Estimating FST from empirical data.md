@@ -9,13 +9,14 @@ Return to the home page and click on the “Option 6 Help” to the right of opt
 Now, open your terminal/command prompt and `ssh` into the supercomputer.
 
 Now navigate to your compute directory and create a new directory entitled `lab1`. 
-```	cd ~/compute
-	mkdir lab1
+```	
+cd ~/compute
+mkdir lab1
 ```
 Now copy the data for this exercise from our shared folder into your `lab1` directory and change directories into your lab1 directory.
 ```
-	cp ~/fsl_groups/fslg_pws472/compute/Lab1/sample_pop.txt lab1
-	cd lab1
+cp ~/fsl_groups/fslg_pws472/compute/Lab1/sample_pop.txt lab1
+cd lab1
 ```
 The data contained in this file are for three loci (Loc1, Loc2, and Loc3) spread over 3 populations. For purposes of this tutorial, let's assume that the sample file contains three fish populations and that they occupy three different ecological niches. Population 1 can be found in lakes, population 2 can be found in the running water in nearby streams, and population 3 can be found in the pools in nearby streams.
 
