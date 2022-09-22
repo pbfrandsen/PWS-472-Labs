@@ -1,8 +1,8 @@
 ## Lab 1: Estimating FST from empirical data
 
-Navigate to http://genepop.curtin.edu.au. This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined here: https://www.tutorialspoint.com/biopython/biopython\_population\_genetics.htm. 
+Navigate to http://genepop.curtin.edu.au. This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined here: https://www.tutorialspoint.com/biopython/biopython_population_genetics.htm. 
 
-Click on the “Data input format” link under “Additional Help Files”. This will take you to http://genepop.curtin.edu.au/help\_input.html, which outlines the details about the file formats acceptable to GenePop. Read over the details and note the particulars about the file format.
+Click on the “Data input format” link under “Additional Help Files”. This will take you to http://genepop.curtin.edu.au/help_input.html, which outlines the details about the file formats acceptable to GenePop. Read over the details and note the particulars about the file format.
 
 Return to the home page and click on the “Option 6 Help” to the right of option 6 (here: http://genepop.curtin.edu.au/Option6.html). Read through the sub options. I just want you to get a taste for the types of FST analyses that can be run. We will be doing a more “vanilla” analysis, but it is good for you to understand the other types of things that you can do.
 
