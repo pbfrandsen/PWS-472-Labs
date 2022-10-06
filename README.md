@@ -10,9 +10,3 @@ This repository houses the computational labs for PWS 472, Conservation Genomics
 [Lab 2: Neutral Variation](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%202-%20Neutral%20Variation.md)
 
 [Lab 3: DNA Barcoding](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%203-%20DNA%20Barcodes.md)
-
-Ideal populations fit with the following assumptions:
-Equal numbers of males and females
-All individuals have an equal probability of contributing an offspring to the next generation
-Constant population size
-Non-overlapping (discrete) generations
