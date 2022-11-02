@@ -14,3 +14,5 @@ This repository houses the computational labs for PWS 472, Conservation Genomics
 [Lab 4: Final Project Write-up](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%204-%20Final%20Project%20Proposal.md)
 
 [Lab 5: Genome Assembly and QC](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%205-%20Genome%20Assembly%20and%20QC.md)
+
+[Lab 6: Phylogenetics using MEGA](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%206-%20Phylogenetics%20Tutorial%20using%20MEGA.md)
