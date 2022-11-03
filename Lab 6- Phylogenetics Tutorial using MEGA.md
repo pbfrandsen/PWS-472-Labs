@@ -30,9 +30,11 @@ downloaded from BOLD systems.
 12. Go back to your original MEGA window and make trees. You will make two phylogenetic trees using different computational methods. First, select the circle labeled 'PHYLOGENY' and then 'Construct/Test Maximum Likelihood Tree'. You will have to direct the program to the .meg file you saved from the alignment. Change the rates and patterns to Has Invariant Sites in the 'Rates among Sites' dropdown. Make sure the number of threads is 2. Click 'OK' and MEGA will generate your tree for you. You can then export your tree under the file tab.
 <img width="582" alt="Screen Shot 2022-06-06 at 2 39 08 PM" src="https://user-images.githubusercontent.com/70609417/172244964-e9504ac4-c805-4f31-b5c7-570623bfb78c.png">
 
-13. Repeat this process by selecting the circle labeled 'PHYLOGENY' and then Construct/Test Maximum Parsimony Tree' **This is different from the Maximum likelihood tree**. Specify the same parameters and export the tree when you are finished.
+13. To root the tree on your outgroup, select the branch leading to your outgroup, select the "Subtree" dropdown, and then select "Root Tree".
 
-14. Things to keep in mind for the write-up:
+14. Repeat this process by selecting the circle labeled 'PHYLOGENY' and then Construct/Test Maximum Parsimony Tree' **This is different from the Maximum likelihood tree**. Specify the same parameters and export the tree when you are finished.
+
+15. Things to keep in mind for the write-up:
 - What organism did you decide to study (if you so something like this for your
 final project, you need to make sure you choose a different organism each time)?
 - How did you retrieve the data and from where?
