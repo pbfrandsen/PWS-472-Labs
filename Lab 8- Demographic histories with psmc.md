@@ -47,6 +47,8 @@ psmc_plot.pl -M "mbs6=0.2" -p -u 3.18e-09 -g 4.2 mbs6 MB-S6.psmc
 
 See appendix II in the [psmc documentation](https://github.com/lh3/psmc) for more information. 
 
+### 4. Download the plots with `scp` or similar.
+See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
 ### Key takeaways for the lab write-up
 
