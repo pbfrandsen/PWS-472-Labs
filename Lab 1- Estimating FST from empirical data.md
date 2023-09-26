@@ -79,4 +79,4 @@ Questions to consider for your lab interpretation:
 3. Does each locus tell the same story about the differences between these populations?
 4. Why might that be?
 
-PS: If you want to exit from the Python, use `(quit())`.
+PS: If you want to exit from the Python, use `quit()`.
