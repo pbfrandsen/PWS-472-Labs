@@ -78,3 +78,5 @@ Questions to consider for your lab interpretation:
 2. What might this suggest about the different habitat types?
 3. Does each locus tell the same story about the differences between these populations?
 4. Why might that be?
+
+PS: If you want to exit from the Python, use `quit()`.

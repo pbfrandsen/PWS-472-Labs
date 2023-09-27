@@ -97,3 +97,4 @@ If you signed up for email alerts, you'll be notified if the job is begun, finis
 Remember to properly exit out of the super computer by typing in `exit`.
 
 <img width="613" alt="Pic20" src="https://user-images.githubusercontent.com/70609417/171961485-939b22fe-41a3-4c47-affb-0f2796369d7b.png">
+
