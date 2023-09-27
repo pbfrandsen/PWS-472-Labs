@@ -7,6 +7,9 @@ Click on the “Data input format” link under “Additional Help Files”. Thi
 Return to the home page and click on the [“Option 6 Help”] (http://genepop.curtin.edu.au/Option6.html) to the right of option 6. Read through the sub options. I just want you to get a taste for the types of FST analyses that can be run. We will be doing a more “vanilla” analysis, but it is good for you to understand the other types of things that you can do.
 
 Now, open your terminal/command prompt and `ssh` into the supercomputer.
+```	
+ssh username@ssh.rc.byu.edu # replace 'username' with your username
+```
 
 Now navigate to your compute directory and create a new directory entitled `lab1`. 
 
@@ -79,4 +82,4 @@ Questions to consider for your lab interpretation:
 3. Does each locus tell the same story about the differences between these populations?
 4. Why might that be?
 
-PS: If you want to exit from the Python, use `quit()`.
+PS: If you want to exit from the Python, use `quit()` or `exit()`.
