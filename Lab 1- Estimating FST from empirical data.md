@@ -1,10 +1,10 @@
 ## Lab 1: Estimating FST from empirical data
 
-Navigate to [http://genepop.curtin.edu.au] (http://genepop.curtin.edu.au). This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined [here] (https://www.tutorialspoint.com/biopython/biopython_population_genetics.htm). 
+Navigate to [http://genepop.curtin.edu.au](http://genepop.curtin.edu.au). This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined [here](https://www.tutorialspoint.com/biopython/biopython_population_genetics.htm). 
 
 Click on the “Data input format” link under “Additional Help Files”. This will take you [here] (http://genepop.curtin.edu.au/help_input.html), which outlines the details about the file formats acceptable to GenePop. Read over the details and note the particulars about the file format.
 
-Return to the home page and click on the [“Option 6 Help”] (http://genepop.curtin.edu.au/Option6.html) to the right of option 6. Read through the sub options. I just want you to get a taste for the types of FST analyses that can be run. We will be doing a more “vanilla” analysis, but it is good for you to understand the other types of things that you can do.
+Return to the home page and click on the [“Option 6 Help”](http://genepop.curtin.edu.au/Option6.html) to the right of option 6. Read through the sub options. I just want you to get a taste for the types of FST analyses that can be run. We will be doing a more “vanilla” analysis, but it is good for you to understand the other types of things that you can do.
 
 Now, open your terminal/command prompt and `ssh` into the supercomputer.
 
@@ -53,7 +53,7 @@ Now, we can look at the populations in our file to see if everything loads in co
 	record.loci_list
 ```
 
-Ok, now we can load the `EasyController`, which will allow us to conduct some tests (for full capability, check [here] (https://biopython.org/docs/1.75/api/Bio.PopGen.GenePop.EasyController.html)). 
+Ok, now we can load the `EasyController`, which will allow us to conduct some tests (for full capability, check [here](https://biopython.org/docs/1.75/api/Bio.PopGen.GenePop.EasyController.html)). 
 
 ```
 from Bio.PopGen.GenePop.EasyController import EasyController
