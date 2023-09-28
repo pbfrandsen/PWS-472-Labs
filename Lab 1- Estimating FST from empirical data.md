@@ -76,10 +76,15 @@ This will output the three populations' averaged FIS, FST, and FIT (in that orde
 3. Estimate FST values between Pop2 and Pop3
 4. Estimate FST values for all three populations
 
-Questions to consider for your lab interpretation:
+Your lab write-up should include the following:
+
+1. A table that contains the FIS, FST, and FIT values for all the comparisons
+2. A combined paragraph as your results and discussions
+
+Here are some questions for you to consider when you are writing your paragraph. 
+
 1. Is there any difference between and among these populations, given the FST values that you have estimated?
 2. What might this suggest about the different habitat types?
-3. Does each locus tell the same story about the differences between these populations?
-4. Why might that be?
+3. Why might that be?
 
-PS: If you want to exit from the Python, use `quit()` or `exit()`.
+PS: If you want to exit from the Python, use `quit()` or `exit()`. If you want to exit the `(biopython)`, use `conda deactivate` .
