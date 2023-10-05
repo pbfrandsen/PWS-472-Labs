@@ -85,7 +85,7 @@ And, finally, estimate Tajima's D:
 print("Tajima's D: %s" % pp.tajimas_d)
 ```
 Things to keep in mind for your lab write-up:
-1. What were the scores for nucleotide diversity, pi (mean number of pairwise differences)?
+1. What were the scores for nucleotide diversity, aka pi(mean number of pairwise differences)?
 2. What about, S (the number of segregating sites)?
 3. What were the values of Tajima's D?
 4. What kind of inferences can we make from these values?
