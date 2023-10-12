@@ -8,7 +8,7 @@ You will be instructed in class how to access and use BOLD. If you are not in cl
 
 Your data file is on the content tab of Learning Suite under Lab Tutorials > Lab 3 Data. Select the text file corresponding to your last name. 
 
-You will see several unknowns in your file. Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment assume that these unknowns all came from a sample of the Waterton Lake National Park in Alberta, Canada.
+You will see several unknowns in your file. Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment assume that these unknowns all came from samples that collected from different national parks in Alberta, Canada.
 
 In your lab report, you should report about each of the unknown species in a table. This table should include the probability of placement, the gene used, the geographical location of the most closely related individuals in the database, and the species name that matched. 
 
