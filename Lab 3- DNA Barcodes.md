@@ -6,9 +6,9 @@ In this lab, you will be identifying unknown sequences in a file using the Barco
 
 You will be instructed in class how to access and use BOLD. If you are not in class, please meet up with a fellow student or come to student hours for more instruction.
 
-Your data file is on the content tab of Learning Suite under Lab Tutorials > Lab 3 Data. Use the Lab3_assignments.txt to find out your assigned numbers of unknown sequences. You can find the actual sequences at Lab3_unknown_sequences_list.txt.
+Your data file is on the content tab of Learning Suite under Lab Tutorials > Lab 3 Data. Select the text file corresponding to your last name and download another file called Lab3_unknown_sequences_list.txt .
 
-You will see several numbers from the Lab3_assignments.txt next to your name. Use those numbers to find the corresponding sequences from the Lab3_unknown_sequences_list.txt . Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment assume that these unknowns all came from samples that collected from different national parks in Alberta, Canada.
+You will see several numbers in your own file. Use those numbers to find the corresponding sequences from the Lab3_unknown_sequences_list.txt . Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment assume that these unknowns all came from samples that collected from different national parks in Alberta, Canada.
 
 In your lab report, you should report about each of the unknown species in a table. This table should include the probability of placement, the gene used, the geographical location of the most closely related individuals in the database, and the species name that matched. 
 
