@@ -6,3 +6,5 @@ This is the final project proposal. As we covered in class, your final project p
 - the type of genetic data that you propose to use and where you have found it online
 - the genetic analyses that you are planning
 - how you plan to relate your project to conservation
+
+Please write this in paragraph form and include an Introduction and Materials and Methods (describing the analyses that you are proposing).
