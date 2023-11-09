@@ -35,8 +35,8 @@ downloaded from BOLD systems.
 14. Repeat this process by selecting the circle labeled 'PHYLOGENY' and then Construct/Test Maximum Parsimony Tree' **This is different from the Maximum likelihood tree**. Specify the same parameters and export the tree when you are finished.
 
 15. Things to keep in mind for the write-up:
-- What organism did you decide to study (if you so something like this for your
-final project, you need to make sure you choose a different organism each time)?
-- How did you retrieve the data and from where?
+- What organism did you decide to study (if you do something similar to this for your
+final project, you need to make sure you choose a different organism)?
+- How did you retrieve the data? From where?
 - What do you notice about the tree? Are the relationships as expected?
 - Are there any evolutionary insights that you can make based on that tree?
