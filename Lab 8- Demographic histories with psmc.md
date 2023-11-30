@@ -40,9 +40,9 @@ psmc_plot.pl -p -u 3.18e-09 -g 4.2 siskin_psmc siskin.psmc
 ```
 
 ### 3. Run `PSMC` on your resequencing data
-* Now re-run the first two steps on your resequencing data (the additional 4 individuals, 2 from Venezuela and 2 from Guyana ) to generate additional `psmc` plots. Keep in mind that you should both adjust the `-d` and `-D` parameters *and* specify a correction when plotting the data. When I looked at the number of SNPs in 10x coverage data as compared with 100x coverage data, I noticed that we lost about 20% of our high confidence SNPs. In order to correct for this, you can specify `-M "sample_name=0.2"` and adjust the scale on the y axis `—-pY35`, for example, for MB-S6, you might specify something like:
+* Now re-run the first two steps on your resequencing data (the additional 4 individuals, 2 from Venezuela and 2 from Guyana ) to generate additional `psmc` plots. Keep in mind that you should both adjust the `-d` and `-D` parameters *and* specify a correction when plotting the data. When I looked at the number of SNPs in 10x coverage data as compared with 100x coverage data, I noticed that we lost about 20% of our high confidence SNPs. In order to correct for this, you can specify `-M "sample_name=0.2"` and adjust the scale on the y axis `—pY35`, for example, for MB-S6, you might specify something like:
 ```
-psmc_plot.pl —-pY35 -M "mbs6=0.2" -p -u 3.18e-09 -g 4.2 mbs6 MB-S6.psmc
+psmc_plot.pl —pY35 -M "mbs6=0.2" -p -u 3.18e-09 -g 4.2 mbs6 MB-S6.psmc
 ```
 
 See appendix II in the [psmc documentation](https://github.com/lh3/psmc) for more information. 
