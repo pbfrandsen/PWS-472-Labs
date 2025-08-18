@@ -11,17 +11,17 @@ Now, open your terminal/command prompt and `ssh` into the supercomputer.
 ssh username@ssh.rc.byu.edu # replace 'username' with your username
 ```
 
-Now navigate to your compute directory and create a new directory entitled `lab1`. 
+Now navigate to your archive directory and create a new directory entitled `lab1`. 
 
 ```	
-cd ~/compute
+cd ~/nobackup/archive
 mkdir lab1
 ```
 
 Now copy the data for this exercise from our shared folder into your `lab1` directory and change directories into your `lab1` directory.
 
 ```
-cp ~/fsl_groups/fslg_pws472/compute/Lab1/sample_pop.txt lab1
+cp ~/groups/fslg_pws472/nobackup/archive/Lab1/sample_pop.txt lab1
 cd lab1
 ```
 
@@ -30,8 +30,8 @@ The data contained in this file are for three loci (Loc1, Loc2, and Loc3) spread
 To get started, let's load conda and switch to your `biopython` virtual environment.
 	
 ```
-module load miniconda3/4.12-pws-472
-conda activate biopython	
+source ~/groups/fslg_pws472/.bashrc
+conda activate biopython
 ```
 
 Now, `(biopython)` should be in front of your cursor. Next, lets start up Python.
