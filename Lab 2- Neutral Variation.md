@@ -7,13 +7,13 @@ First, login to the supercomputer using PuTTy or your Mac terminal.
 
 Then, load conda and activate the `dendropy` environment:
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate dendropy
 ```
-Now, move to your compute directory and copy the data for today's lab into your directory:
+Now, move to your archive directory and copy the data for today's lab into your directory:
 ```
-cd ~/compute
-cp -r ~/fsl_groups/fslg_pws472/compute/lab2 ./
+cd ~/nobackup/archive
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab2/ ./
 ```
 Now, move into the `lab2` directory:
 ```
