@@ -2,12 +2,12 @@
 
 For this lab, we will be using `bam` files output from `bowtie2` (a read-mapping program), calling variants with `ANGSD`, and then creating a PCA plot and an ADMIXTURE plot. Note that this is a very small sample size for an admixture plot, however, the process would be the same with a larger sample size.
 
-We will be using samfiles that I have already mapped reads to. Reminder, that you should create your own folder in which to run these analyses, ideally in your `~/compute` directory (rather than in the class shared directory).
+We will be using samfiles that I have already mapped reads to. Reminder, that you should create your own folder in which to run these analyses, ideally in your `~/nobackup/archive` directory (rather than in the class shared directory).
 
-### 1. Copy the `lab7` directory to your `compute` directory
+### 1. Copy the `lab7` directory to your `archive` directory
 ```
-cd ~/compute
-cp -r ~/fsl_groups/fslg_pws472/compute/lab7 ./
+cd ~/nobackup/archive
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab7 ./
 cd lab7
 ```
 
@@ -37,7 +37,7 @@ Remember that you can do this with the job script generator from the [supercompu
     
 You should choose 4GB of RAM per CPU and 12 CPUs. The  `ANGSD`  command for to call the genotypes for a PCA is:
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
 angsd -GL 1 -out PCA -nThreads $SLURM_NPROCS -doGlf 2 -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1 -bam bamlist.txt
 ```
@@ -51,15 +51,15 @@ When it is complete, look at the files in your directory. You should have three 
 
 In this step, we're going to use the  `PCA.beagle.gz`  file to create a covariance matrix in  `PCAngsd`. To create covariance matrix:  
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
-python ~/fsl_groups/fslg_pws472/apps/miniconda3/envs/angsd/bin/pcangsd-v.0.99/pcangsd.py -b PCA.beagle.gz -o siskin_PCA
+python ~/groups/fslg_pws472/apps/miniconda3/envs/angsd/bin/pcangsd-v.0.99/pcangsd.py -b PCA.beagle.gz -o siskin_PCA
 ```
 After this is finished running, you should have a file in your directory called  `siskin_PCA.cov`. This is your covariance matrix and can be used to generate your PCA.
 
 ### 4. Create your PCA plot
 
-You can plot the PCA with an  `R`  script that can be found in  `~/fsl_groups/fslg_pws472/compute/lab7/scripts/PCA_plot.r`. Copy it into your  `angsd`  folder. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You can copy this file from  `~/fsl_groups/fslg_pws472/compute/lab7/angsd/siskin_pop.txt`. You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
+You can plot the PCA with an  `R`  script that can be found in  `~/groups/fslg_pws472/nobackup/archive/lab7/scripts/PCA_plot.r`. Copy it into your  `angsd`  folder. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You can copy this file from  `~/groups/fslg_pws472/nobackup/archive/lab7/angsd/siskin_pop.txt`. You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
 ```
 conda deactivate
 conda activate r
@@ -69,7 +69,7 @@ Rscript PCA_plot.r
 
 `NGSAdmix` is now part of the `ANGSD` package and can perform admixture analysis using the beagle file of genotype likelihoods that you generated in step 2. `cd` into your `jobs` directory and create a job file with the following commands. The parameter that you need to think about here is `K`, which as you learned in the lecture is the number of ancestral populations. Since we have two populations in this dataset, one from Venezuela and one from Guyana, we will set `K` to 2.
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
 NGSadmix -likes ../angsd/PCA.beagle.gz -K 2 -o ../angsd/siskin_admix -P $SLURM_NPROCS
 ```
