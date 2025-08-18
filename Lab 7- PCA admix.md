@@ -77,7 +77,7 @@ When the job is finished, you will have a couple of new files in the `angsd` dir
 
 ### 6. Create simple admixture plot
 Now we will create a simple admixture plot using our results from `NGSadmix`
-Copy the script, `admix_plot.r` from `~/fsl_groups/fslg_pws472/nobackup/archive/lab7/scripts/admix_plot.r` to your `angsd` directory.
+Copy the script, `admix_plot.r` from `~/groups/fslg_pws472/nobackup/archive/lab7/scripts/admix_plot.r` to your `angsd` directory.
 Make sure that `siskin_pop.txt` is still in your directory. This is another fast script, which is fine to run with `qrsh`.
 ```
 conda activate r
