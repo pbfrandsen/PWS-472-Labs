@@ -34,6 +34,7 @@ psmc -N25 -t15 -r5 -p "4+25*2+4+6" -o ../psmc/siskin.psmc ../psmc/siskin.psmcfa
 ```
 module load gnuplot
 module load psmc
+module load texlive
 psmc_plot.pl -p -u 3.18e-09 -g 4.2 siskin_psmc siskin.psmc
 ```
 
