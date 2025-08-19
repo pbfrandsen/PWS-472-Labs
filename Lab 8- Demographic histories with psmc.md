@@ -8,34 +8,32 @@ The first thing you'll want to do is create a `lab8` directory in your `~/noback
 * Create a new directory in `lab8` called `psmc`
 * Create another new directory in `lab8` called `jobs`
 * This process is outlined in the commands below. The `-d` parameter is for minimum depth, which should be about 1/3 of the average depth of coverage, and `-D` is maximum depth, which should be about twice the depth of coverage. In this case, for the reference genome, we use `-d 16 and -D 120`. Note that, for the resequencing jobs, you will have to adjust these parameters. These have only 10x coverage on average so should be approximately `-d 3` and `-D 25`. Submit the following job from your `jobs` directory from a job file called `diploid_fastq.job`. Ensure that you run the reference from Guyana in this first run:
-	+ **module to load**: ```module load samtools/1.9```
-	+ **module to load**: ```module load bcftools```
-	+ **command**: 
 
 ```
+source ~/groups/fslg_pws472/.bashrc
+conda activate samtools
 samtools mpileup -C50 -uf ../genome/Contig86_pilon.fasta ../variants/ref_siskin.sorted.bam.mdup.bam | bcftools call -c - | vcfutils.pl vcf2fq -d 16 -D 120 | gzip > ../psmc/diploid.fq.gz
 ```
 
 ### 2. `PSMC`
 * In this step, we will create the `PSMC` `FASTA` file. Do this by submitting this job using a job file in your `jobs` directory.
-	+ **module to load**: ```module load psmc```
-	+ **command**: 
+
 ```
+module load psmc
 fq2psmcfa -q20 ../psmc/diploid.fq.gz > ../psmc/siskin.psmcfa
 ```
 
 * First, run a single `PSMC` run.
-	+ **module to load**: `module load psmc`
-	+ **command**:
+
 ```
+module load psmc
 psmc -N25 -t15 -r5 -p "4+25*2+4+6" -o ../psmc/siskin.psmc ../psmc/siskin.psmcfa
 ```
 
 * Finally, we can create the `PSMC` plot without bootstrapping. This doesn't take a long time so go ahead and run it directly into the `lab8/psmc` directory.
-    + **module to load**: `module load gnuplot`
-    + **module to load**: `module load psmc`
-    + **command**: 
 ```
+module load gnuplot
+module load psmc
 psmc_plot.pl -p -u 3.18e-09 -g 4.2 siskin_psmc siskin.psmc
 ```
 
