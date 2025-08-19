@@ -1,5 +1,5 @@
 ## Lab 2: Neutral Variation
-In this lab we will take a look at a few sample files: One with mitochondrial data from primates and another with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x)
+In this lab we will take a look at a few sample files: One with mitochondrial data from primates and another with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x))
 
 We will be using the Python package `dendropy` to generate summary statistics about the two populations, including Tajima's D. 
 
