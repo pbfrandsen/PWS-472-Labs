@@ -44,16 +44,16 @@ Now, we can look at the populations in our file to see if everything loads in co
 
 ```
 # Load the GenePop module from Biopython
-	from Bio.PopGen import GenePop
+from Bio.PopGen import GenePop
 	
 # Load your pop file
-	record = GenePop.read(open("sample_pop.txt"))
+record = GenePop.read(open("sample_pop.txt"))
 	
 # Now check to ensure that everything loaded properly
-	record.populations
+record.populations
 	
 # Now see that your locus names load properly
-	record.loci_list
+record.loci_list
 ```
 
 Ok, now we can load the `EasyController`, which will allow us to conduct some tests (for full capability, check [here](https://biopython.org/docs/1.75/api/Bio.PopGen.GenePop.EasyController.html)). 
