@@ -10,7 +10,6 @@ cd ~/nobackup/archive
 cp -r ~/groups/fslg_pws472/nobackup/archive/lab7 ./
 cd lab7
 ```
-
 ### 2. Generate genotype likelihoods with `ANGSD`
 We're going to create a file called  `bamlist.txt` in the `angsd` directory. This file will have relative paths to all of the bam files that we will use for this step.
     
@@ -49,7 +48,7 @@ When it is complete, look at the files in your directory. You should have three 
 
 ### 3. Generate a covariance matrix using  `PCAngsd`
 
-In this step, we're going to use the  `PCA.beagle.gz`  file to create a covariance matrix in  `PCAngsd`. To create covariance matrix:  
+In this step, we're going to use the  `PCA.beagle.gz`  file to create a covariance matrix in  `PCAngsd`. To create covariance matrix run the following in your terminal:  
 ```
 source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
@@ -59,7 +58,7 @@ After this is finished running, you should have a file in your directory called 
 
 ### 4. Create your PCA plot
 
-You can plot the PCA with an  `R`  script that can be found in  `~/groups/fslg_pws472/nobackup/archive/lab7/scripts/PCA_plot.r`. Copy it into your  `angsd`  folder. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You can copy this file from  `~/groups/fslg_pws472/nobackup/archive/lab7/angsd/siskin_pop.txt`. You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
+You can plot the PCA with the `PCA_plot.r` script. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You should have both of these files in your `angsd` folder (if not you can copy them from `~/groups/fslg_pws472/nobackup/archive/lab7/angsd`). You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
 ```
 conda deactivate
 conda activate r
@@ -67,17 +66,17 @@ Rscript PCA_plot.r
 ```
 ### 5. Run Admixture analysis with `NGSAdmix`
 
-`NGSAdmix` is now part of the `ANGSD` package and can perform admixture analysis using the beagle file of genotype likelihoods that you generated in step 2. `cd` into your jobs directory and create  a job file with the following commands. The parameter that you need to think about here is `K`, which as you learned in the lecture is the number of ancestral populations. Since we have two populations in this dataset, one from Venezuela and one from Guyana, we will set `K` to 2.
+`NGSAdmix` is now part of the `ANGSD` package and can perform admixture analysis using the beagle file of genotype likelihoods that you generated in step 2. Create  a job file with the following commands. The parameter that you need to think about here is `K`, which as you learned in the lecture is the number of ancestral populations. Since we have two populations in this dataset, one from Venezuela and one from Guyana, we will set `K` to 2.
 ```
 source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
-NGSadmix -likes ../angsd/PCA.beagle.gz -K 2 -o ../angsd/siskin_admix -P $SLURM_NPROCS
+NGSadmix -likes PCA.beagle.gz -K 2 -o siskin_admix -P $SLURM_NPROCS
 ```
 When the job is finished, you will have a couple of new files in the `angsd` directory. `siskin_admix.fopt.gz` is a gzipped file that contains the estimated allele frequencies for each population for each locus. `siskin_admix.qopt` contains the estimated admixture proportions for each individual.
 
 ### 6. Create simple admixture plot
 Now we will create a simple admixture plot using our results from `NGSadmix`
-Copy the script, `admix_plot.r` from `~/groups/fslg_pws472/nobackup/archive/lab7/scripts/admix_plot.r` to your `angsd` directory.
+Check that you have the script, `admix_plot.r` from in your `angsd` directory or copy it from `~/groups/fslg_pws472/nobackup/archive/lab7/angsd/`.
 Make sure that `siskin_pop.txt` is still in your directory. This is another fast script, which is fine to run with `qrsh`.
 ```
 conda activate r
