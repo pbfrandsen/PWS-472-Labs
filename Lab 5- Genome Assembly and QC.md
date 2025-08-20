@@ -8,15 +8,15 @@ You will have an opportunity to explore GenBank assemblies of other moths and re
 
 Open the command prompt or the terminal application and `ssh` into the supercomputer.
 
-Change directories into your compute directory and create a new directory called `lab5`.
+Change directories into your archive directory and create a new directory called `lab5`.
 ```
-cd ~/compute
+cd ~/nobackup/archive
 mkdir lab5
 cd lab5
 ```
 Copy the raw PacBio read `FASTQ` and `FASTA` files from our shared PWS 472 directory. We will use the `FASTQ` file for the assembly, but we will use the `FASTA` file to estimate the average read length and the total number of base pairs in the raw data.
 ```
-cp ~/fsl_groups/fslg_pws472/compute/lab5/data/m64140_201011_172335.Q20.fast* ./
+cp ~/groups/fslg_pws472/nobackup/archive/lab5/data/m64140_201011_172335.Q20.fast* ./
 ```
 Notice that, in the command above, we use a wildcard `*` to copy both the `FASTA` file and the `FASTQ` file.
 
@@ -24,9 +24,9 @@ Notice that, in the command above, we use a wildcard `*` to copy both the `FASTA
 
 Copy the `assembly_stats` script to your folder.
 ```
-cp -r ~/fsl_groups/fslg_pws472/compute/lab5/data/assembly_stats ./
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab5/data/assembly_stats ./
 ```
-Make sure conda is loaded (`module load miniconda3/4.12-pws-472`) then run `assembly_stats` on your `FASTA` raw reads. Note that this script is primarily used to assess the completeness of a *genome assembly* not necessarily raw data. However, we will use it here to figure out the average read length and the total number of base pairs in the raw data. You will later use these to estimate the coverage in the raw data.
+Make sure conda is loaded (`source ~/groups/fslg_pws472/.bashrc`) then run `assembly_stats` on your `FASTA` raw reads. Note that this script is primarily used to assess the completeness of a *genome assembly* not necessarily raw data. However, we will use it here to figure out the average read length and the total number of base pairs in the raw data. You will later use these to estimate the coverage in the raw data.
 ```
 python assembly_stats/assembly_stats.py m64140_201011_172335.Q20.fasta
 ```
@@ -38,7 +38,7 @@ Create a new job script using the [Job Script Generator](https://rc.byu.edu/docu
 
 Open the job file and add the following commands to the bottom, separated by line breaks:
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate hifiasm
 hifiasm -o plodia.asm -t 24 m64140_201011_172335.Q20.fastq
 ```
@@ -54,11 +54,11 @@ Create a new job script using the [Job Script Generator](https://rc.byu.edu/docu
 
 Copy the `busco_downloads` folder from the `pws472` class folder to your working folder
 ```
-cp -r ~/fsl_groups/fslg_pws472/compute/lab5/data/busco_downloads ./
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab5/data/busco_downloads ./
 ```
 d. Open the job file and add the following commands to the bottom, separated by line breaks:
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate busco
 busco -o plodia_busco -i plodia.asm.bp.p_ctg.fa -l insecta_odb10 -c 4 -m genome --offline
 ```

@@ -1,5 +1,5 @@
 ## Lab 2: Neutral Variation
-In this lab we will take a look at a few sample files: One with mitochondrial data from primates and another with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x)
+In this lab we will take a look at a few sample files: One with mitochondrial data from primates and another with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x))
 
 We will be using the Python package `dendropy` to generate summary statistics about the two populations, including Tajima's D. 
 
@@ -7,13 +7,13 @@ First, login to the supercomputer using PuTTy or your Mac terminal.
 
 Then, load conda and activate the `dendropy` environment:
 ```
-module load miniconda3/4.12-pws-472
+source ~/groups/fslg_pws472/.bashrc
 conda activate dendropy
 ```
-Now, move to your compute directory and copy the data for today's lab into your directory:
+Now, move to your archive directory and copy the data for today's lab into your directory:
 ```
-cd ~/compute
-cp -r ~/fsl_groups/fslg_pws472/compute/lab2 ./
+cd ~/nobackup/archive
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab2/ ./
 ```
 Now, move into the `lab2` directory:
 ```
