@@ -15,8 +15,8 @@ This repository houses the computational labs for PWS 472, Conservation Genomics
 
 [Lab 5: Genome Assembly and QC](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%205-%20Genome%20Assembly%20and%20QC.md)
 
-[Lab 6: Phylogenetics using MEGA](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%206-%20Phylogenetics%20Tutorial%20using%20MEGA.md)
+[Lab 6: PCA and Admixture](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%206-%20PCA%20admix.md)
 
-[Lab 7: PCA and Admixture](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%207-%20PCA%20admix.md)
+[Lab 7: Demographic histories with `PSMC`](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%207-%20Demographic%20histories%20with%20psmc.md)
 
-[Lab 8: Demographic histories with `PSMC`](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%208-%20Demographic%20histories%20with%20psmc.md)
+[Lab 8: Phylogenetics using MEGA](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%208-%20Phylogenetics%20Tutorial%20using%20MEGA.md)
