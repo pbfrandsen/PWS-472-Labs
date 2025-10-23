@@ -1,12 +1,12 @@
-## Lab 8: Demographic histories with `psmc`
+## Lab 7: Demographic histories with `psmc`
 
 During this lab, we will use our bam files (generated in lab 7) to estimate demographic histories using the pairwise sequential Markovian coalescent (PSMC).
 
-The first thing you'll want to do is create a `lab8` directory in your `~/nobackup/archive` directory. Change directories into your newly created `lab8` directory. Then copy both the `genome` directory and the `variants` directory from `~/groups/fslg_pws472/nobackup/archive/lab7` into your new `lab8` directory. **Hint**: Use `cp -r ~/groups/fslg_pws472/nobackup/archive/lab7/genome ./` to copy the genome directory. Just replace "genome" with "variants" in the first path to copy over the variants folder as well.
+The first thing you'll want to do is create a `lab7` directory in your `~/nobackup/archive` directory. Change directories into your newly created `lab7` directory. Then copy both the `genome` directory and the `variants` directory from `~/groups/fslg_pws472/nobackup/archive/lab6` into your new `lab7` directory. **Hint**: Use `cp -r ~/groups/fslg_pws472/nobackup/archive/lab6/genome ./` to copy the genome directory. Just replace "genome" with "variants" in the first path to copy over the variants folder as well.
 
 ### 1. Identify heterozygous sites using `mpileup` and `bcftools`, then export to a diploid `FASTQ` that can be converted into a special `PSMC` `FASTA` file.
-* Create a new directory in `lab8` called `psmc`
-* Create another new directory in `lab8` called `jobs`
+* Create a new directory in `lab7` called `psmc`
+* Create another new directory in `lab7` called `jobs`
 * This process is outlined in the commands below. The `-d` parameter is for minimum depth, which should be about 1/3 of the average depth of coverage, and `-D` is maximum depth, which should be about twice the depth of coverage. In this case, for the reference genome, we use `-d 16 and -D 120`. Note that, for the resequencing jobs, you will have to adjust these parameters. These have only 10x coverage on average so should be approximately `-d 3` and `-D 25`. Submit the following job from your `jobs` directory from a job file called `diploid_fastq.job`. Ensure that you run the reference from Guyana in this first run:
 
 ```
@@ -30,7 +30,7 @@ module load psmc
 psmc -N25 -t15 -r5 -p "4+25*2+4+6" -o ../psmc/siskin.psmc ../psmc/siskin.psmcfa
 ```
 
-* Finally, we can create the `PSMC` plot without bootstrapping. This doesn't take a long time so go ahead and run it directly into the `lab8/psmc` directory.
+* Finally, we can create the `PSMC` plot without bootstrapping. This doesn't take a long time so go ahead and run it directly into the `lab7/psmc` directory.
 ```
 module load gnuplot
 module load psmc
@@ -49,7 +49,7 @@ See appendix II in the [psmc documentation](https://github.com/lh3/psmc) for mor
 ### 4. Download the plots with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
-### Key takeaways for the lab write-up
+### Key takeaways for the lab write-up (to be combined with lab 6)
 
 * What do you notice about your `psmc` plots from the various resequencing runs? How are they similar? How do they differ? Why might this be?
 
