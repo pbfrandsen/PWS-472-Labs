@@ -1,14 +1,14 @@
-## Lab 7: PCA admix
+## Lab 6: PCA admix
 
 For this lab, we will be using `bam` files output from `bowtie2` (a read-mapping program), calling variants with `ANGSD`, and then creating a PCA plot and an ADMIXTURE plot. Note that this is a very small sample size for an admixture plot, however, the process would be the same with a larger sample size.
 
 We will be using samfiles that I have already mapped reads to. Reminder, that you should create your own folder in which to run these analyses, ideally in your `~/nobackup/archive` directory (rather than in the class shared directory).
 
-### 1. Copy the `lab7` directory to your `archive` directory
+### 1. Copy the `lab6` directory to your `archive` directory
 ```
 cd ~/nobackup/archive
-cp -r ~/groups/fslg_pws472/nobackup/archive/lab7 ./
-cd lab7
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab6 ./
+cd lab6
 ```
 ### 2. Generate genotype likelihoods with `ANGSD`
 We're going to create a file called  `bamlist.txt` in the `angsd` directory. This file will have relative paths to all of the bam files that we will use for this step.
@@ -58,7 +58,7 @@ After this is finished running, you should have a file in your directory called 
 
 ### 4. Create your PCA plot
 
-You can plot the PCA with the `PCA_plot.r` script. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You should have both of these files in your `angsd` folder (if not you can copy them from `~/groups/fslg_pws472/nobackup/archive/lab7/angsd`). You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
+You can plot the PCA with the `PCA_plot.r` script. In order to run it, you need to have a list with the sample names in the same order as the original  `bamlist`,  `siskin_pop.txt`, in the same directory as the both the script and your covariance matrix. You should have both of these files in your `angsd` folder (if not you can copy them from `~/groups/fslg_pws472/nobackup/archive/lab6/angsd`). You may need to modify this list so that the filenames match perfectly with the file names in your `bamlist`. 
 ```
 conda deactivate
 conda activate r
@@ -76,7 +76,7 @@ When the job is finished, you will have a couple of new files in the `angsd` dir
 
 ### 6. Create simple admixture plot
 Now we will create a simple admixture plot using our results from `NGSadmix`
-Check that you have the script, `admix_plot.r` from in your `angsd` directory or copy it from `~/groups/fslg_pws472/nobackup/archive/lab7/angsd/`.
+Check that you have the script, `admix_plot.r` from in your `angsd` directory or copy it from `~/groups/fslg_pws472/nobackup/archive/lab6/angsd/`.
 Make sure that `siskin_pop.txt` is still in your directory. This is another fast script, which is fine to run with `qrsh`.
 ```
 conda activate r
@@ -91,7 +91,7 @@ We don't have enough individuals to make this very interesting, but re-run numbe
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
 ### 9. For the Lab write-up
-This lab will combined with lab 8 into a single lab write-up (double the amount of points and double the length). However, feel free to get started with this one. Consider the following as you write it up:
+This lab will combined with lab 7 into a single lab write-up (double the amount of points and double the length). However, feel free to get started with this one. Consider the following as you write it up:
 - Your lab write-up should contain clear methods on which analyses you performed and why
 - When introducing each method, you should give a short explanation of what the software is actually doing
 - Any plots that you generate should be included as figures
