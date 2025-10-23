@@ -1,4 +1,4 @@
-## Lab 6: Phylogenetics Tutorial using MEGA
+## Lab 8: Phylogenetics Tutorial using MEGA
 
 In this tutorial you will make a phylogenetic tree using a program called MEGA with sequences
 downloaded from BOLD systems.
