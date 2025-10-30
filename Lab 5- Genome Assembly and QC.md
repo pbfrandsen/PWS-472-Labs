@@ -94,4 +94,4 @@ Items to ensure that you include in your lab write-up:
 
 - Full details of the methods that you used, including commands to each piece of software.
 - The amount of coverage of HiFi PacBio data that was generated (_Hint:_ you can estimate this by dividing the total number of base pairs in the reads by the total number of base pairs in the assembly).
-- The contiguity stats of the genome that you assembled. How does this compare to another moth genome that you compared it to on GenBank? One that you can compare it to is the Diamondback moth, [_Plutella xylostella_](https://www.ncbi.nlm.nih.gov/assembly/GCF_000330985.1). Examine the differences in sequencing technology, the differences in coverage, and the differences in contiguity.
+- The contiguity stats of the genome that you assembled. How does this compare to another moth genome that you compared it to on GenBank? One that you can compare it to is the Diamondback moth, [_Plutella xylostella_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_932276165.1). Examine the differences in sequencing technology, the differences in coverage, and the differences in contiguity.
