@@ -11,7 +11,7 @@ downloaded from BOLD systems.
 
 4. At this point we are going to leave MEGA to find the sequences to use for the phylogeny.
 
-5. Navigate to BOLD systems http://www.boldsystems.org/index.php. Click on 'Databases', found along the top bar. Click on 'Public Data Portal'. 
+5. Navigate to BOLD systems http://www.boldsystems.org/index.php. Click on 'Data', found along the top bar. Click on 'Portal' and then 'Launch Portal'. 
 
 6. Search for sequences of interest, ideally several genera within a family. To do this you can look up any family you are interested in and find several genera within that family. For example, if your family was Felidae you could search for Panthera, Neofelis, Lynx and Puma. This can be found from a simple google search. You should also choose an “outgroup” or a taxon that fall just outside your organism of interest. For example, in the case of Felidae, this could be a Hyena.
 
