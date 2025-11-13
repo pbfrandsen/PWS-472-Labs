@@ -7,6 +7,7 @@ The first thing you'll want to do is create a `lab7` directory in your `~/noback
 ### 1. Identify heterozygous sites using `mpileup` and `bcftools`, then export to a diploid `FASTQ` that can be converted into a special `PSMC` `FASTA` file.
 * Create a new directory in `lab7` called `psmc`
 * Create another new directory in `lab7` called `jobs`
+* Change directories into your newly created `jobs` directory
 * This process is outlined in the commands below. The `-d` parameter is for minimum depth, which should be about 1/3 of the average depth of coverage, and `-D` is maximum depth, which should be about twice the depth of coverage. In this case, for the reference genome, we use `-d 16 and -D 120`. Note that, for the resequencing jobs, you will have to adjust these parameters. These have only 10x coverage on average so should be approximately `-d 3` and `-D 25`. Submit the following job from your `jobs` directory from a job file called `diploid_fastq.job`. Ensure that you run the reference from Guyana in this first run:
 
 ```
