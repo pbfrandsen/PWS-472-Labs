@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 0: Introduction to the Supercomputer · PWS 472</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-lab="lab-0">
+
+<header id="topbar">
+  <button id="menu-btn" aria-label="Toggle menu">☰</button>
+  <div class="brand"><span>PWS 472</span> · Conservation Genomics</div>
+  <div class="spacer"></div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search-input" type="search" placeholder="Search labs…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+</header>
+
+<nav id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Course Labs</div>
+    <a class="sidebar-link" href="index.html">
+      <span class="sidebar-num">🏠</span> Home
+    </a>
+    
+        <a class="sidebar-link" href="lab-0.html" data-lab="lab-0">
+          <span class="sidebar-num">0</span>
+          Introduction to the Supercomputer
+        </a>
+        <a class="sidebar-link" href="lab-1.html" data-lab="lab-1">
+          <span class="sidebar-num">1</span>
+          Estimating FST from Empirical Data
+        </a>
+        <a class="sidebar-link" href="lab-2.html" data-lab="lab-2">
+          <span class="sidebar-num">2</span>
+          Neutral Variation
+        </a>
+        <a class="sidebar-link" href="lab-3.html" data-lab="lab-3">
+          <span class="sidebar-num">3</span>
+          DNA Barcoding
+        </a>
+        <a class="sidebar-link" href="lab-4.html" data-lab="lab-4">
+          <span class="sidebar-num">4</span>
+          Final Project Proposal
+        </a>
+        <a class="sidebar-link" href="lab-5.html" data-lab="lab-5">
+          <span class="sidebar-num">5</span>
+          Genome Assembly and QC
+        </a>
+        <a class="sidebar-link" href="lab-6.html" data-lab="lab-6">
+          <span class="sidebar-num">6</span>
+          PCA and Admixture Analysis
+        </a>
+        <a class="sidebar-link" href="lab-7.html" data-lab="lab-7">
+          <span class="sidebar-num">7</span>
+          Demographic Histories with PSMC
+        </a>
+        <a class="sidebar-link" href="lab-8.html" data-lab="lab-8">
+          <span class="sidebar-num">8</span>
+          Phylogenetics with MEGA
+        </a>
+  </div>
+  <div class="sidebar-progress">
+    <div class="sidebar-progress-label">
+      <span>Overall Progress</span>
+      <span id="sidebar-progress-label">0 / 9 labs done</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="sidebar-progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</nav>
+<main id="main">
+
+<div class="lab-header">
+  <div class="lab-badge">Lab 0</div>
+  <h1>Introduction to the Supercomputer</h1>
+  <p>Log in to the BYU supercomputer, write a job script, submit it with SLURM, and check its status.</p>
+</div>
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-1.html">Lab 1 →</a></div>
+
+<div class="progress-checklist">
+  <h4>📋 Lab Checklist <span style="font-weight:400;color:var(--text-muted);font-size:.8em;text-transform:none;letter-spacing:0">— check off steps as you go</span></h4>
+  
+      <div class="checklist-item" id="item-lab-0-0">
+        <input type="checkbox" id="chk-lab-0-0">
+        <label for="chk-lab-0-0">Log in to the BYU supercomputer via SSH</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-1">
+        <input type="checkbox" id="chk-lab-0-1">
+        <label for="chk-lab-0-1">Open the Job Script Generator</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-2">
+        <input type="checkbox" id="chk-lab-0-2">
+        <label for="chk-lab-0-2">Create a hello_there.job file</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-3">
+        <input type="checkbox" id="chk-lab-0-3">
+        <label for="chk-lab-0-3">Submit the job with sbatch</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-4">
+        <input type="checkbox" id="chk-lab-0-4">
+        <label for="chk-lab-0-4">Check job status with squeue</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-5">
+        <input type="checkbox" id="chk-lab-0-5">
+        <label for="chk-lab-0-5">Receive email confirmation (optional)</label>
+      </div>
+      <div class="checklist-item" id="item-lab-0-6">
+        <input type="checkbox" id="chk-lab-0-6">
+        <label for="chk-lab-0-6">Exit the supercomputer cleanly</label>
+      </div>
+  <div class="checklist-progress">
+    <div class="progress-bar-track"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <span class="checklist-count">0/7 complete</span>
+  </div>
+</div>
+<div class="lab-content">
+<h3 id="logging-into-the-supercomputer">Logging into the Supercomputer</h3>
+<p>Fill out the first three boxes with [your netID]@ssh.rc.byu.edu, and hit enter.</p>
+
+<img alt="Pic1" src="https://user-images.githubusercontent.com/70609417/171961146-3fba64e8-f05b-46e2-bcd5-3d102129e8e0.png">
+
+<p>Enter the same password you use for the Fulton supercomputing lab and the authentication code. No letters will appear on the screen - don&#x27;t worry, it&#x27;s still receiving the input.</p>
+
+<img alt="Pic2" src="https://user-images.githubusercontent.com/70609417/171961156-9ae74527-e17c-45cb-bf23-4d12a68ec68a.png">
+
+<h3 id="writing-a-job-file">Writing a Job File</h3>
+
+<p>We&#x27;ll be using the Job Script Generator.</p>
+<p>(https://rc.byu.edu/documentation/slurm/script-generator).</p>
+
+<img alt="Pic9" src="https://user-images.githubusercontent.com/70609417/171961299-72e8d32f-b960-4664-9680-06d42af25a1d.png">
+
+<p>To get here, go to Documentation &gt; Job Submission &gt; Job Script Generator .</p>
+
+<p>By default, mine looks something like this:</p>
+
+<img alt="Pic10" src="https://user-images.githubusercontent.com/70609417/171961312-3a2bcf25-1e98-4a2a-9ab6-7869aa02b852.png">
+
+<p>If you would like to enter your email, you can opt to receive an email when the job has begun,</p>
+<p>ended, or if it aborted. It can be nice to get these kinds of alerts instead of checking the job</p>
+<p>status every few minutes from the command line.</p>
+<p>Most labs will specify ranges for the number of processors, memory per processor, and</p>
+<p>wall-time.</p>
+
+<p>For practice, since we&#x27;re submitting a very small job, you can just say 1 processor core with 1</p>
+<p>GB memory and 10 minutes for simple practice code. If it aborts, you can modify these</p>
+<p>numbers. It&#x27;s also helpful to name your job. In this case, I named mine &quot;hello_there&quot;.</p>
+
+<img alt="Pic11" src="https://user-images.githubusercontent.com/70609417/171961323-a0ca0372-92ec-45a7-91d0-a6ad6c675a0e.png">
+
+<p>When you&#x27;re satisfied with the settings, scroll down to where it says ‘Job Script’ and click &quot;copy</p>
+<p>script to clipboard&quot; (you can also highlight and copy).</p>
+
+<img alt="Pic12" src="https://user-images.githubusercontent.com/70609417/171961334-05388ce4-88ca-4e3f-8842-fb02117726c8.png">
+
+<p>In the command line, create a text file called &quot;hello_there.job&quot; using the <code>nano</code> command:</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>nano hello_there.job</code></pre></div>
+<p>You&#x27;ll be brought to a screen that looks like this:</p>
+
+<img alt="Pic13" src="https://user-images.githubusercontent.com/70609417/171961348-491c8175-d486-48be-aef3-074b9bede0e1.png">
+
+<p>Paste in the job script you just copied, then type in the commands: </p>
+
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>echo &quot;hello there!&quot;
+sleep 75
+echo &quot;You&#x27;re finished!&quot;</code></pre></div>
+
+<p>This will tell the computer to print out &quot;hello there!&quot;, wait 75 seconds, then print out &quot;you&#x27;re finished!&quot;.</p>
+
+<img alt="Pic14" src="https://user-images.githubusercontent.com/70609417/171961392-0a572524-606d-4f91-8f3d-811bd413ce32.png">
+
+<p>Use <code>^O</code> to save or rename your text file, and <code>^X</code> to exit. After hitting <code>^X</code>, be sure to hit <code>Y</code> and enter to save the changes you&#x27;ve made.</p>
+
+<img alt="Pic15" src="https://user-images.githubusercontent.com/70609417/171961403-eb708614-4daf-43f4-b680-ae4040d8ca09.png">
+
+<p>You can check that it saved by using the <code>cat</code> command to view the text file:</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cat hello_there.job</code></pre></div>
+
+<img alt="Pic16" src="https://user-images.githubusercontent.com/70609417/171961426-24deaebf-2145-492b-b289-0f87fdeb5903.png">
+
+<h3 id="submitting-a-job">Submitting a Job</h3>
+
+<p>Once you have the job file created, use the <code>sbatch</code> command to submit your job:</p>
+
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>sbatch hello_there.job</code></pre></div>
+
+<img alt="Pic17" src="https://user-images.githubusercontent.com/70609417/171961449-b9759a5e-ef9f-4a70-8965-16a926c5fac2.png">
+
+<h3 id="checking-the-job-status">Checking the Job Status</h3>
+
+<p>Use the <code>squeue</code> command to check job status:</p>
+
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>squeue -u [your netID or username]</code></pre></div>
+<img alt="Pic18" src="https://user-images.githubusercontent.com/70609417/171961466-b4cadd37-1c1c-4b75-a99e-81f7c77e0d9b.png">
+
+<p>You can do this as much as you&#x27;d like:</p>
+
+<img alt="Pic19" src="https://user-images.githubusercontent.com/70609417/171961474-c27ae3be-e3c2-4817-80cb-16a0291ce98e.png">
+
+<p>If you signed up for email alerts, you&#x27;ll be notified if the job is begun, finished, or aborted.</p>
+
+<p>Remember to properly exit out of the super computer by typing in <code>exit</code>.</p>
+
+<img alt="Pic20" src="https://user-images.githubusercontent.com/70609417/171961485-939b22fe-41a3-4c47-affb-0f2796369d7b.png">
+
+
+</div>
+
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-1.html">Lab 1 →</a></div>
+
+</main>
+<footer class="site-footer">
+  <span>PWS 472 · Conservation Genomics · BYU</span>
+  <span><a href="https://github.com/pbfrandsen/PWS-472-Labs" target="_blank">GitHub Repository ↗</a></span>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

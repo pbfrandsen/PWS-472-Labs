@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 3: DNA Barcoding · PWS 472</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-lab="lab-3">
+
+<header id="topbar">
+  <button id="menu-btn" aria-label="Toggle menu">☰</button>
+  <div class="brand"><span>PWS 472</span> · Conservation Genomics</div>
+  <div class="spacer"></div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search-input" type="search" placeholder="Search labs…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+</header>
+
+<nav id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Course Labs</div>
+    <a class="sidebar-link" href="index.html">
+      <span class="sidebar-num">🏠</span> Home
+    </a>
+    
+        <a class="sidebar-link" href="lab-0.html" data-lab="lab-0">
+          <span class="sidebar-num">0</span>
+          Introduction to the Supercomputer
+        </a>
+        <a class="sidebar-link" href="lab-1.html" data-lab="lab-1">
+          <span class="sidebar-num">1</span>
+          Estimating FST from Empirical Data
+        </a>
+        <a class="sidebar-link" href="lab-2.html" data-lab="lab-2">
+          <span class="sidebar-num">2</span>
+          Neutral Variation
+        </a>
+        <a class="sidebar-link" href="lab-3.html" data-lab="lab-3">
+          <span class="sidebar-num">3</span>
+          DNA Barcoding
+        </a>
+        <a class="sidebar-link" href="lab-4.html" data-lab="lab-4">
+          <span class="sidebar-num">4</span>
+          Final Project Proposal
+        </a>
+        <a class="sidebar-link" href="lab-5.html" data-lab="lab-5">
+          <span class="sidebar-num">5</span>
+          Genome Assembly and QC
+        </a>
+        <a class="sidebar-link" href="lab-6.html" data-lab="lab-6">
+          <span class="sidebar-num">6</span>
+          PCA and Admixture Analysis
+        </a>
+        <a class="sidebar-link" href="lab-7.html" data-lab="lab-7">
+          <span class="sidebar-num">7</span>
+          Demographic Histories with PSMC
+        </a>
+        <a class="sidebar-link" href="lab-8.html" data-lab="lab-8">
+          <span class="sidebar-num">8</span>
+          Phylogenetics with MEGA
+        </a>
+  </div>
+  <div class="sidebar-progress">
+    <div class="sidebar-progress-label">
+      <span>Overall Progress</span>
+      <span id="sidebar-progress-label">0 / 9 labs done</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="sidebar-progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</nav>
+<main id="main">
+
+<div class="lab-header">
+  <div class="lab-badge">Lab 3</div>
+  <h1>DNA Barcoding</h1>
+  <p>Identify unknown sequences using the Barcode of Life Data System (BOLD) and infer biome origin.</p>
+</div>
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-2.html">← Lab 2</a><a href="lab-4.html">Lab 4 →</a></div>
+
+<div class="progress-checklist">
+  <h4>📋 Lab Checklist <span style="font-weight:400;color:var(--text-muted);font-size:.8em;text-transform:none;letter-spacing:0">— check off steps as you go</span></h4>
+  
+      <div class="checklist-item" id="item-lab-3-0">
+        <input type="checkbox" id="chk-lab-3-0">
+        <label for="chk-lab-3-0">Download your unique sequence file from Learning Suite</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-1">
+        <input type="checkbox" id="chk-lab-3-1">
+        <label for="chk-lab-3-1">Open BOLD Systems</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-2">
+        <input type="checkbox" id="chk-lab-3-2">
+        <label for="chk-lab-3-2">Identify each unknown sequence</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-3">
+        <input type="checkbox" id="chk-lab-3-3">
+        <label for="chk-lab-3-3">Record species name, probability, and location</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-4">
+        <input type="checkbox" id="chk-lab-3-4">
+        <label for="chk-lab-3-4">Examine a phylogenetic tree for one species</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-5">
+        <input type="checkbox" id="chk-lab-3-5">
+        <label for="chk-lab-3-5">Determine the likely biome of origin</label>
+      </div>
+      <div class="checklist-item" id="item-lab-3-6">
+        <input type="checkbox" id="chk-lab-3-6">
+        <label for="chk-lab-3-6">Write your lab report</label>
+      </div>
+  <div class="checklist-progress">
+    <div class="progress-bar-track"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <span class="checklist-count">0/7 complete</span>
+  </div>
+</div>
+<div class="lab-content">
+
+<p>Using the Barcode of Life Data System to identify unknown samples of DNA</p>
+
+<p>In this lab, you will be identifying unknown sequences in a file using the Barcode of Life Data System (<a href="boldsystems.org" target="_blank">BOLD</a>).</p>
+
+<p>You will be instructed in class how to access and use BOLD. If you are not in class, please meet up with a fellow student or come to student hours for more instruction.</p>
+
+<p>Your data file is on the content tab of Learning Suite under Lab Tutorials &gt; Lab 3 Data. Select the text file corresponding to your last name and download it.</p>
+
+<p>You will see several sequences your own file. Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment, assume that these unknowns all came from samples from a specific biome somewhere in North America. Part of your objective is to try to figure out which biome they were derived from and approximately where in North America they could have come from. Be careful because there could be invasive species or contaminant sequences in your list.</p>
+
+<p>In your lab report, you should report about each of the unknown species in a table. This table should include the probability of placement, the geographical location of the most closely related individuals in the database, and the species name that matched. Each of you have a unique set of sequences and you will be graded, partly, on whether your identifications are correct.</p>
+
+<p>In addition to identifying the details above for each of the unknowns, for one of them, let&#x27;s go more in depth. When you identify the species, there is a small icon under “Tree.” Click on that icon. You should receive a pop-up and then be able to view the tree. What do you notice about the distance to other species? Include this figure in your lab report along with some discussion on what you notice.</p>
+
+<p>A few things to think about in preparing your lab report:</p>
+<ol><li>What are DNA barcodes and why are you using them here?</li><li>Are the species that you identified from the same place? If not, what are some possible explanations for this (don&#x27;t freak out if they aren&#x27;t from the same place, but have some fun with why this might be)?</li><li>Which biome do you think your samples came from (e.g., forest, marine, freshwater, alpine, desert)</li><li>Did you notice anything about the health of the ecosystem? Were there invasive species? Could metabarcoding be a good way to detect the spread of invasive species.</li><li>In these samples, how well do the barcodes work for identifying these species?</li></ol>
+
+</div>
+
+<div class="writeup-box">
+  <h4>📝 Lab Write-up Requirements</h4>
+  <ol><li>What are DNA barcodes and why are you using them here?</li><li>Are the identified species from the same place? Possible explanations?</li><li>Which biome do you think your samples came from?</li><li>Were there invasive species? Could metabarcoding detect invasives?</li><li>How well do the barcodes work for identifying these species?</li></ol>
+</div>
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-2.html">← Lab 2</a><a href="lab-4.html">Lab 4 →</a></div>
+
+</main>
+<footer class="site-footer">
+  <span>PWS 472 · Conservation Genomics · BYU</span>
+  <span><a href="https://github.com/pbfrandsen/PWS-472-Labs" target="_blank">GitHub Repository ↗</a></span>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

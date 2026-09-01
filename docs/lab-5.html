@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 5: Genome Assembly and QC · PWS 472</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-lab="lab-5">
+
+<header id="topbar">
+  <button id="menu-btn" aria-label="Toggle menu">☰</button>
+  <div class="brand"><span>PWS 472</span> · Conservation Genomics</div>
+  <div class="spacer"></div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search-input" type="search" placeholder="Search labs…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+</header>
+
+<nav id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Course Labs</div>
+    <a class="sidebar-link" href="index.html">
+      <span class="sidebar-num">🏠</span> Home
+    </a>
+    
+        <a class="sidebar-link" href="lab-0.html" data-lab="lab-0">
+          <span class="sidebar-num">0</span>
+          Introduction to the Supercomputer
+        </a>
+        <a class="sidebar-link" href="lab-1.html" data-lab="lab-1">
+          <span class="sidebar-num">1</span>
+          Estimating FST from Empirical Data
+        </a>
+        <a class="sidebar-link" href="lab-2.html" data-lab="lab-2">
+          <span class="sidebar-num">2</span>
+          Neutral Variation
+        </a>
+        <a class="sidebar-link" href="lab-3.html" data-lab="lab-3">
+          <span class="sidebar-num">3</span>
+          DNA Barcoding
+        </a>
+        <a class="sidebar-link" href="lab-4.html" data-lab="lab-4">
+          <span class="sidebar-num">4</span>
+          Final Project Proposal
+        </a>
+        <a class="sidebar-link" href="lab-5.html" data-lab="lab-5">
+          <span class="sidebar-num">5</span>
+          Genome Assembly and QC
+        </a>
+        <a class="sidebar-link" href="lab-6.html" data-lab="lab-6">
+          <span class="sidebar-num">6</span>
+          PCA and Admixture Analysis
+        </a>
+        <a class="sidebar-link" href="lab-7.html" data-lab="lab-7">
+          <span class="sidebar-num">7</span>
+          Demographic Histories with PSMC
+        </a>
+        <a class="sidebar-link" href="lab-8.html" data-lab="lab-8">
+          <span class="sidebar-num">8</span>
+          Phylogenetics with MEGA
+        </a>
+  </div>
+  <div class="sidebar-progress">
+    <div class="sidebar-progress-label">
+      <span>Overall Progress</span>
+      <span id="sidebar-progress-label">0 / 9 labs done</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="sidebar-progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</nav>
+<main id="main">
+
+<div class="lab-header">
+  <div class="lab-badge">Lab 5</div>
+  <h1>Genome Assembly and QC</h1>
+  <p>Assemble the pantry moth genome from PacBio HiFi reads using hifiasm and assess quality with BUSCO.</p>
+</div>
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-4.html">← Lab 4</a><a href="lab-6.html">Lab 6 →</a></div>
+
+<div class="progress-checklist">
+  <h4>📋 Lab Checklist <span style="font-weight:400;color:var(--text-muted);font-size:.8em;text-transform:none;letter-spacing:0">— check off steps as you go</span></h4>
+  
+      <div class="checklist-item" id="item-lab-5-0">
+        <input type="checkbox" id="chk-lab-5-0">
+        <label for="chk-lab-5-0">SSH and create lab5 directory</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-1">
+        <input type="checkbox" id="chk-lab-5-1">
+        <label for="chk-lab-5-1">Copy PacBio raw reads</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-2">
+        <input type="checkbox" id="chk-lab-5-2">
+        <label for="chk-lab-5-2">Run assembly_stats on FASTA reads</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-3">
+        <input type="checkbox" id="chk-lab-5-3">
+        <label for="chk-lab-5-3">Create and submit hifiasm job (24 cores, 2 hrs)</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-4">
+        <input type="checkbox" id="chk-lab-5-4">
+        <label for="chk-lab-5-4">Convert GFA to FASTA with awk</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-5">
+        <input type="checkbox" id="chk-lab-5-5">
+        <label for="chk-lab-5-5">Run assembly_stats on the assembled genome</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-6">
+        <input type="checkbox" id="chk-lab-5-6">
+        <label for="chk-lab-5-6">Create and submit BUSCO job</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-7">
+        <input type="checkbox" id="chk-lab-5-7">
+        <label for="chk-lab-5-7">View BUSCO short summary</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-8">
+        <input type="checkbox" id="chk-lab-5-8">
+        <label for="chk-lab-5-8">Compare assembly to diamondback moth on GenBank</label>
+      </div>
+      <div class="checklist-item" id="item-lab-5-9">
+        <input type="checkbox" id="chk-lab-5-9">
+        <label for="chk-lab-5-9">Write lab report with all required details</label>
+      </div>
+  <div class="checklist-progress">
+    <div class="progress-bar-track"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <span class="checklist-count">0/10 complete</span>
+  </div>
+</div>
+<div class="lab-content">
+
+<p>In this lab, we will use the latest and greatest sequencing technology (PacBio HiFi) to assemble the genome of <em>Plodia interpunctella</em>, the pantry moth. We will also assess the sequencing coverage, the contiguity of the resulting assembly, and the gene completeness using BUSCO.</p>
+
+<p>You will have an opportunity to explore GenBank assemblies of other moths and relate how this assembly compares to other moths in terms of contiguity.</p>
+
+<h3 id="step-1-login-to-the-supercomputer-create-a-new-folder-for-your-analysis-and-copy-over-the-raw-data">Step 1: Login to the supercomputer, create a new folder for your analysis, and copy over the raw data</h3>
+
+<p>Open the command prompt or the terminal application and <code>ssh</code> into the supercomputer.</p>
+
+<p>Change directories into your archive directory and create a new directory called <code>lab5</code>.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cd ~/nobackup/archive
+mkdir lab5
+cd lab5</code></pre></div>
+<p>Copy the raw PacBio read <code>FASTQ</code> and <code>FASTA</code> files from our shared PWS 472 directory. We will use the <code>FASTQ</code> file for the assembly, but we will use the <code>FASTA</code> file to estimate the average read length and the total number of base pairs in the raw data.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cp ~/groups/fslg_pws472/nobackup/archive/lab5/data/m64140_201011_172335.Q20.fast* ./</code></pre></div>
+<p>Notice that, in the command above, we use a wildcard <code>*</code> to copy both the <code>FASTA</code> file and the <code>FASTQ</code> file.</p>
+
+<h3 id="step-2-evaluate-the-raw-reads-with-the-assembly-stats-script">Step 2: Evaluate the raw reads with the assembly stats script</h3>
+
+<p>Copy the <code>assembly_stats</code> script to your folder.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cp -r ~/groups/fslg_pws472/nobackup/archive/lab5/data/assembly_stats ./</code></pre></div>
+<p>Make sure conda is loaded (<code>source ~/groups/fslg<em>pws472/.bashrc</code>) then run <code>assembly</em>stats</code> on your <code>FASTA</code> raw reads. Note that this script is primarily used to assess the completeness of a <em>genome assembly</em> not necessarily raw data. However, we will use it here to figure out the average read length and the total number of base pairs in the raw data. You will later use these to estimate the coverage in the raw data.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>python assembly_stats/assembly_stats.py m64140_201011_172335.Q20.fasta</code></pre></div>
+<p>You should see two different <code>JSON</code> objects entitled &quot;Contig Stats:&quot; and &quot;Scaffold Stats:&quot;. They will be the same values and, for this part of the exercise, what we are actually measuring are &quot;Read Stats:&quot;. Take note of the total number of base pairs and the average read lengths. You&#x27;ll use these later.</p>
+
+<h3 id="step-3-prepare-a-job-script-for-assembly-and-start-your-assembly-job">Step 3: Prepare a job script for assembly and start your assembly job</h3>
+
+<p>Create a new job script using the <a href="https://rc.byu.edu/documentation/slurm/script-generator" target="_blank">Job Script Generator</a>. Make sure that the job is limited to one node, select 24 processor cores, a wall-time of 2 hours, and 1 GB per processor. Add a name for your job and select the boxes to receive emails when your job begins, ends, and/or aborts. Copy the script from below <strong>Job Script</strong> on the webpage and paste it into a new file called <code>hifiasm.job</code> in your folder. Use your favorite text editor to do this.</p>
+
+<p>Open the job file and add the following commands to the bottom, separated by line breaks:</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>source ~/groups/fslg_pws472/.bashrc
+conda activate hifiasm
+hifiasm -o plodia.asm -t 24 m64140_201011_172335.Q20.fastq</code></pre></div>
+<p>Close the job file and submit it using <code>sbatch</code></p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>sbatch hifiasm.job</code></pre></div>
+<p>You can check on your job using <code>squeue -u &lt;username&gt;</code>. It should complete relatively quickly and you will receive an email when it does. In the meantime, you can move to the next step to install <code>BUSCO</code> and get the job file ready for job submission.</p>
+
+<h3 id="step-4-generate-a-new-job-file-for-your-busco-run">Step 4: Generate a new job file for your <code>BUSCO</code> run</h3>
+
+<p>Create a new job script using the <a href="https://rc.byu.edu/documentation/slurm/script-generator" target="_blank">Job Script Generator</a>. Make sure that the job is limited to one node, select 4 processor cores, 4 GB of RAM per processor, and a wall-time of 12 hours. Copy the resulting script into a new job file called <code>busco.job</code>.</p>
+
+<p>Copy the <code>busco_downloads</code> folder from the <code>pws472</code> class folder to your working folder</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cp -r ~/groups/fslg_pws472/nobackup/archive/lab5/data/busco_downloads ./</code></pre></div>
+<p>d. Open the job file and add the following commands to the bottom, separated by line breaks:</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>source ~/groups/fslg_pws472/.bashrc
+conda activate busco
+busco -o plodia_busco -i plodia.asm.bp.p_ctg.fa -l insecta_odb10 -c 4 -m genome --offline</code></pre></div>
+<p><strong>Wait to submit this job until you complete step 5.</strong></p>
+
+<h3 id="step-5-convert-your-completed-assembly-to-fasta-and-evaluate-the-contiguity-using-assembly_stats">Step 5: Convert your completed assembly to <code>FASTA</code> and evaluate the contiguity using <code>assembly_stats</code></h3>
+
+<p>Wait until you get the email that your <code>hifiasm</code> job has completed. Once it has, you will have many new files in your folder. You can read the <code>hifiasm</code> documentation to understand what each file is. For these next steps, however, we want to convert the final assembly from a Graphical Fragment Assembly (<code>.gfa</code>) file to a <code>FASTA</code> file. This is simply for the convenience of using downstream tools. You can do this with the following command (you can run this interactively):</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>awk &#x27;$1 ~/S/ {print &quot;&gt;&quot;$2&quot;\n&quot;$3}&#x27; plodia.asm.bp.p_ctg.gfa &gt; plodia.asm.bp.p_ctg.fa</code></pre></div>
+<p>Now assess the contiguity of your assembly using the assembly stats script.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>python assembly_stats/assembly_stats.py plodia.asm.bp.p_ctg.fa</code></pre></div>
+<p>You&#x27;ll want to make sure that you keep this information handy. I&#x27;d like to see it in a table in your lab write-up. You will also use it to compare contiguity with an existing moth genome assembly. You will use the total number of base pairs in your assembly to estimate coverage from the total number of base pairs in your reads.</p>
+
+<h3 id="step-6-run-busco-on-your-assembly">Step 6: Run <code>BUSCO</code> on your assembly</h3>
+
+<p>Since you already created the job file, you can simply submit the new file with <code>sbatch</code>.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>sbatch busco.job</code></pre></div>
+<h3 id="step-7-evaluate-busco-and-lab-write-up-questions-to-answer">Step 7: Evaluate <code>BUSCO</code> and lab write-up questions to answer</h3>
+
+<p>Once <code>busco</code> is complete (this may take quite some time), you&#x27;ll be able to view how many expected single copy orthologs are in your assembly. You can do this by viewing the <code>short<em>summary.specific.insecta</em>odb10.plodia_busco.txt</code> file.</p>
+<div class="code-block"><button class="copy-btn">Copy</button><pre><code>cat plodia_busco/short_summary.specific.insecta_odb10.plodia_busco.txt</code></pre></div>
+<p>Complete BUSCOs include both single-copy and duplicated BUSCOs. Fragmented BUSCOs are where part of the gene was found, but the whole gene could not be confirmed. Missing BUSCOs are single copy orthologs that were not found in the assembly. More details about these output and more details on how to further analyze them can be found <a href="https://busco.ezlab.org/busco_userguide.html#interpreting-the-results" target="_blank">here</a>.</p>
+
+<p>Items to ensure that you include in your lab write-up:</p>
+
+<ul><li>Full details of the methods that you used, including commands to each piece of software.</li><li>The amount of coverage of HiFi PacBio data that was generated (<em>Hint:</em> you can estimate this by dividing the total number of base pairs in the reads by the total number of base pairs in the assembly).</li><li>The contiguity stats of the genome that you assembled. How does this compare to another moth genome that you compared it to on GenBank? One that you can compare it to is the Diamondback moth, <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_932276165.1" target="_blank"><em>Plutella xylostella</em></a>. Examine the differences in sequencing technology, the differences in coverage, and the differences in contiguity.</li></ul>
+
+</div>
+
+<div class="writeup-box">
+  <h4>📝 Lab Write-up Requirements</h4>
+  <ol><li>Full methods with commands for each software</li><li>Estimated HiFi PacBio coverage (total bp reads ÷ total bp assembly)</li><li>Contiguity stats compared to the Diamondback moth genome (GCF_932276165.1)</li><li>Differences in sequencing technology, coverage, and contiguity</li></ol>
+</div>
+<div class="lab-nav"><a href="index.html">🏠 All Labs</a><a href="lab-4.html">← Lab 4</a><a href="lab-6.html">Lab 6 →</a></div>
+
+</main>
+<footer class="site-footer">
+  <span>PWS 472 · Conservation Genomics · BYU</span>
+  <span><a href="https://github.com/pbfrandsen/PWS-472-Labs" target="_blank">GitHub Repository ↗</a></span>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

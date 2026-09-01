@@ -1,0 +1,10 @@
+# GitHub Pages configuration for PWS 472 Labs
+# No Jekyll theme - we use our own custom HTML/CSS
+
+# This tells GitHub Pages to use the docs/ folder
+# (set this in repo Settings > Pages > Source > /docs folder)
+
+# Exclude build artifacts
+exclude:
+  - "*.py"
+  - "*.md"
