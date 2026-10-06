@@ -1,10 +1,16 @@
 # GitHub Pages configuration for PWS 472 Labs
-# No Jekyll theme - we use our own custom HTML/CSS
+# (Pages source: repo Settings > Pages > Source > master, /docs folder)
+#
+# Each lab is a Markdown file (lab-N.md) rendered through _layouts/lab.html.
+# Edit the Markdown and push; GitHub builds the site. No theme, no plugins.
 
-# This tells GitHub Pages to use the docs/ folder
-# (set this in repo Settings > Pages > Source > /docs folder)
+markdown: kramdown
+kramdown:
+  input: GFM
+  # Keep quotes straight so commands copied from prose still work.
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  syntax_highlighter_opts:
+    disable: true
 
-# Exclude build artifacts
 exclude:
   - "*.py"
-  - "*.md"

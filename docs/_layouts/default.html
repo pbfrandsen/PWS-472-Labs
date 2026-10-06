@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{%- assign labs = site.pages | where: "layout", "lab" | sort: "lab_num" %}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.lab_num != nil %}Lab {{ page.lab_num }}: {{ page.title }} · PWS 472{% else %}{{ page.title }}{% endif %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body{% if page.lab_num != nil %} data-lab="lab-{{ page.lab_num }}"{% endif %}>
+
+<header id="topbar">
+  <button id="menu-btn" aria-label="Toggle menu">☰</button>
+  <div class="brand"><span>PWS 472</span> · Conservation Genomics</div>
+  <div class="spacer"></div>
+  <div id="search-wrap">
+    <span id="search-icon">🔍</span>
+    <input id="search-input" type="search" placeholder="Search labs…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+</header>
+
+<nav id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Course Labs</div>
+    <a class="sidebar-link" href="index.html">
+      <span class="sidebar-num">🏠</span> Home
+    </a>
+    {% for lab in labs %}
+    <a class="sidebar-link" href="lab-{{ lab.lab_num }}.html" data-lab="lab-{{ lab.lab_num }}">
+      <span class="sidebar-num">{{ lab.lab_num }}</span>
+      {{ lab.title }}
+    </a>
+    {%- endfor %}
+  </div>
+  <div class="sidebar-progress">
+    <div class="sidebar-progress-label">
+      <span>Overall Progress</span>
+      <span id="sidebar-progress-label">0 / {{ labs.size }} labs done</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="sidebar-progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</nav>
+<main id="main">
+{{ content }}
+</main>
+<footer class="site-footer">
+  <span>PWS 472 · Conservation Genomics · BYU</span>
+  <span><a href="https://github.com/pbfrandsen/PWS-472-Labs" target="_blank">GitHub Repository ↗</a></span>
+</footer>
+<script>
+const LABS = [
+{%- for lab in labs %}
+  { id: 'lab-{{ lab.lab_num }}', title: {{ lab.title | prepend: ": " | prepend: lab.lab_num | prepend: "Lab " | jsonify }}, url: 'lab-{{ lab.lab_num }}.html',
+    body: {{ lab.keywords | jsonify }} },
+{%- endfor %}
+];
+</script>
+<script src="assets/app.js"></script>
+</body>
+</html>

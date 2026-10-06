@@ -1,4 +1,34 @@
-## Lab 7: Demographic histories with `psmc`
+---
+layout: lab
+lab_num: 7
+title: "Demographic Histories with PSMC"
+blurb: "Reconstruct population size through time from resequencing data using the pairwise sequential Markovian coalescent."
+keywords: "psmc demographic history pairwise sequential markovian coalescent bcftools samtools mpileup population size"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Create lab7 directory and copy genome/variants"
+  - id: 1
+    text: "Run mpileup/bcftools to create diploid FASTQ"
+  - id: 2
+    text: "Convert to PSMC FASTA with fq2psmcfa"
+  - id: 3
+    text: "Run single PSMC analysis"
+  - id: 4
+    text: "Generate PSMC plot"
+  - id: 5
+    text: "Repeat for all resequencing individuals"
+  - id: 6
+    text: "Download PSMC plots"
+  - id: 7
+    text: "Write combined lab 6+7 report"
+writeup:
+  - "What do you notice about PSMC plots across individuals?"
+  - "How are the Guyana vs. Venezuela individuals similar/different?"
+  - "What do the plots tell us about demographic history?"
+  - "Are there trends among populations?"
+---
 
 During this lab, we will use our bam files (generated in lab 7) to estimate demographic histories using the pairwise sequential Markovian coalescent (PSMC).
 

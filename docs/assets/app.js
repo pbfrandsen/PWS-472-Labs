@@ -1,5 +1,26 @@
 /* ─── PWS-472 Site JS ─────────────────────────────────────────── */
 
+/* ── Code blocks ───────────────────────────────────────────────── */
+// Markdown renders bare <pre>; wrap each one in a .code-block with a copy button.
+function initCodeBlocks() {
+  document.querySelectorAll('.lab-content pre').forEach(pre => {
+    if (pre.closest('.code-block')) return;
+    const outer = pre.closest('.highlighter-rouge') || pre;
+    const block = document.createElement('div');
+    block.className = 'code-block';
+    outer.replaceWith(block);
+    block.innerHTML = '<button class="copy-btn">Copy</button>';
+    block.appendChild(pre);
+  });
+}
+
+// Markdown links to other sites open in a new tab, as the old HTML did.
+function initExternalLinks() {
+  document.querySelectorAll('.lab-content a[href^="http"]').forEach(a => {
+    if (a.host !== location.host) { a.target = '_blank'; a.rel = 'noopener'; }
+  });
+}
+
 /* ── Copy buttons ──────────────────────────────────────────────── */
 function initCopyButtons() {
   document.querySelectorAll('.code-block').forEach(block => {
@@ -81,7 +102,8 @@ function updateSidebarProgress() {
   const label = document.getElementById('sidebar-progress-label');
   if (!fill) return;
 
-  let done = 0, total = 9;
+  let done = 0;
+  const total = document.querySelectorAll('.sidebar-link[data-lab]').length || 1;
   try {
     const global = JSON.parse(localStorage.getItem('pws472_done') || '{}');
     done = Object.values(global).filter(Boolean).length;
@@ -123,26 +145,7 @@ function initToc() {
 }
 
 /* ── Search ─────────────────────────────────────────────────────── */
-const LABS = [
-  { id: 'lab-0', title: 'Lab 0: Introduction to the Supercomputer', url: 'lab-0.html',
-    body: 'logging ssh supercomputer job script slurm sbatch squeue nano netid byu hpc cluster' },
-  { id: 'lab-1', title: 'Lab 1: Estimating FST from Empirical Data', url: 'lab-1.html',
-    body: 'fst genepop biopython population genetics loci fis fit python conda easycontroller' },
-  { id: 'lab-2', title: 'Lab 2: Neutral Variation', url: 'lab-2.html',
-    body: "tajima d dendropy neutral variation segregating sites pairwise differences pi nucleotide diversity stickleback primate mitochondrial" },
-  { id: 'lab-3', title: 'Lab 3: DNA Barcoding', url: 'lab-3.html',
-    body: 'bold barcode of life dna barcoding species identification unknown sequences biome invasive' },
-  { id: 'lab-4', title: 'Lab 4: Final Project Proposal', url: 'lab-4.html',
-    body: 'final project proposal organism question genetic data molecular markers accession conservation' },
-  { id: 'lab-5', title: 'Lab 5: Genome Assembly and QC', url: 'lab-5.html',
-    body: 'genome assembly hifiasm pacbio hifi busco plodia pantry moth contiguity n50 fasta fastq gfa' },
-  { id: 'lab-6', title: 'Lab 6: PCA and Admixture', url: 'lab-6.html',
-    body: 'pca principal component analysis admixture angsd pcangsd ngsadmix bam bowtie2 siskin population structure' },
-  { id: 'lab-7', title: 'Lab 7: Demographic Histories with PSMC', url: 'lab-7.html',
-    body: 'psmc demographic history pairwise sequential markovian coalescent bcftools samtools mpileup population size' },
-  { id: 'lab-8', title: 'Lab 8: Phylogenetics with MEGA', url: 'lab-8.html',
-    body: 'mega phylogenetics maximum likelihood parsimony bold fasta alignment muscle tree phylogeny outgroup coi' },
-];
+// LABS is defined inline by _layouts/default.html from each lab's front matter.
 
 function initSearch() {
   const input = document.getElementById('search-input');
@@ -217,6 +220,8 @@ function initIndexCards() {
 
 /* ── Bootstrap ──────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  initCodeBlocks();
+  initExternalLinks();
   initCopyButtons();
   initChecklist();
   initSidebarActive();

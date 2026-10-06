@@ -1,22 +1,30 @@
 # PWS-472-Labs
  Computational labs for PWS 472, Conservation Genomics
 
-This repository houses the computational labs for PWS 472, Conservation Genomics. To complete a lab, click on the Markdown file above and follow the instructions provided. Enjoy :)
+This repository houses the computational labs for PWS 472, Conservation Genomics. The labs are published at **https://paulfrandsen.com/PWS-472-Labs/**. Enjoy :)
 
-[Lab 0: Logging into the supercomputer](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%200-%20Introduction%20to%20the%20Supercomputer.md)
+[Lab 0: Logging into the supercomputer](https://paulfrandsen.com/PWS-472-Labs/lab-0.html)
 
-[Lab 1: Estimating Fst from empirical data](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%201-%20Estimating%20FST%20from%20empirical%20data.md)
+[Lab 1: Estimating Fst from empirical data](https://paulfrandsen.com/PWS-472-Labs/lab-1.html)
 
-[Lab 2: Neutral Variation](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%202-%20Neutral%20Variation.md)
+[Lab 2: Neutral Variation](https://paulfrandsen.com/PWS-472-Labs/lab-2.html)
 
-[Lab 3: DNA Barcoding](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%203-%20DNA%20Barcodes.md)
+[Lab 3: DNA Barcoding](https://paulfrandsen.com/PWS-472-Labs/lab-3.html)
 
-[Lab 4: Final Project Write-up](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%204-%20Final%20Project%20Proposal.md)
+[Lab 4: Final Project Write-up](https://paulfrandsen.com/PWS-472-Labs/lab-4.html)
 
-[Lab 5: Genome Assembly and QC](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%205-%20Genome%20Assembly%20and%20QC.md)
+[Lab 5: Genome Assembly and QC](https://paulfrandsen.com/PWS-472-Labs/lab-5.html)
 
-[Lab 6: PCA and Admixture](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%206-%20PCA%20admix.md)
+[Lab 6: PCA and Admixture](https://paulfrandsen.com/PWS-472-Labs/lab-6.html)
 
-[Lab 7: Demographic histories with `PSMC`](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%207-%20Demographic%20histories%20with%20psmc.md)
+[Lab 7: Demographic histories with `PSMC`](https://paulfrandsen.com/PWS-472-Labs/lab-7.html)
 
-[Lab 8: Phylogenetics using MEGA](https://github.com/pbfrandsen/PWS-472-Labs/blob/master/Lab%208-%20Phylogenetics%20Tutorial%20using%20MEGA.md)
+[Lab 8: Phylogenetics using MEGA](https://paulfrandsen.com/PWS-472-Labs/lab-8.html)
+
+## Editing the labs
+
+Each lab is a Markdown file, `docs/lab-N.md`. Edit it and push; GitHub Pages rebuilds the site with Jekyll.
+
+The front matter at the top of each file holds the page title, the one-line blurb (also used on the home page card), search keywords, the checklist, and the write-up questions. Checklist `id`s are the keys for students' saved progress, so never renumber an existing one; give a new item a new, unused id.
+
+The page chrome lives in `docs/_layouts/` (`default.html` for every page, `lab.html` for labs), and styles and scripts in `docs/assets/`.

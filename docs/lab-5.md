@@ -1,4 +1,38 @@
-## Lab 5: Genome Assembly and QC
+---
+layout: lab
+lab_num: 5
+title: "Genome Assembly and QC"
+blurb: "Assemble the pantry moth genome from PacBio HiFi reads using hifiasm and assess quality with BUSCO."
+keywords: "genome assembly hifiasm pacbio hifi busco plodia pantry moth contiguity n50 fasta fastq gfa"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "SSH and create lab5 directory"
+  - id: 1
+    text: "Copy PacBio raw reads"
+  - id: 2
+    text: "Run assembly_stats on FASTA reads"
+  - id: 3
+    text: "Create and submit hifiasm job (24 cores, 2 hrs)"
+  - id: 4
+    text: "Convert GFA to FASTA with awk"
+  - id: 5
+    text: "Run assembly_stats on the assembled genome"
+  - id: 6
+    text: "Create and submit BUSCO job"
+  - id: 7
+    text: "View BUSCO short summary"
+  - id: 8
+    text: "Compare assembly to diamondback moth on GenBank"
+  - id: 9
+    text: "Write lab report with all required details"
+writeup:
+  - "Full methods with commands for each software"
+  - "Estimated HiFi PacBio coverage (total bp reads ÷ total bp assembly)"
+  - "Contiguity stats compared to the Diamondback moth genome (GCF_932276165.1)"
+  - "Differences in sequencing technology, coverage, and contiguity"
+---
 
 In this lab, we will use the latest and greatest sequencing technology (PacBio HiFi) to assemble the genome of _Plodia interpunctella_, the pantry moth. We will also assess the sequencing coverage, the contiguity of the resulting assembly, and the gene completeness using BUSCO.
 

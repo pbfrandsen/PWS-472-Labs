@@ -1,4 +1,33 @@
-## Lab 3: DNA Barcoding
+---
+layout: lab
+lab_num: 3
+title: "DNA Barcoding"
+blurb: "Identify unknown sequences using the Barcode of Life Data System (BOLD) and infer biome origin."
+keywords: "bold barcode of life dna barcoding species identification unknown sequences biome invasive"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Download your unique sequence file from Learning Suite"
+  - id: 1
+    text: "Open BOLD Systems"
+  - id: 2
+    text: "Identify each unknown sequence"
+  - id: 3
+    text: "Record species name, probability, and location"
+  - id: 4
+    text: "Examine a phylogenetic tree for one species"
+  - id: 5
+    text: "Determine the likely biome of origin"
+  - id: 6
+    text: "Write your lab report"
+writeup:
+  - "What are DNA barcodes and why are you using them here?"
+  - "Are the identified species from the same place? Possible explanations?"
+  - "Which biome do you think your samples came from?"
+  - "Were there invasive species? Could metabarcoding detect invasives?"
+  - "How well do the barcodes work for identifying these species?"
+---
 
 Using the Barcode of Life Data System to identify unknown samples of DNA
 

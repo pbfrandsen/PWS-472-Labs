@@ -1,0 +1,44 @@
+---
+layout: default
+---
+{%- assign labs = site.pages | where: "layout", "lab" | sort: "lab_num" %}
+{%- assign lab_id = "lab-" | append: page.lab_num %}
+{%- assign prev_num = page.lab_num | minus: 1 %}
+{%- assign next_num = page.lab_num | plus: 1 %}
+{%- capture lab_nav %}<div class="lab-nav"><a href="index.html">🏠 All Labs</a>
+{%- for lab in labs %}{% if lab.lab_num == prev_num %}<a href="lab-{{ prev_num }}.html">← Lab {{ prev_num }}</a>{% endif %}{% endfor %}
+{%- for lab in labs %}{% if lab.lab_num == next_num %}<a href="lab-{{ next_num }}.html">Lab {{ next_num }} →</a>{% endif %}{% endfor -%}
+</div>{% endcapture %}
+
+<div class="lab-header">
+  <div class="lab-badge">Lab {{ page.lab_num }}</div>
+  <h1>{{ page.title }}</h1>
+  <p>{{ page.blurb }}</p>
+</div>
+{{ lab_nav }}
+
+{% if page.checklist %}
+<div class="progress-checklist">
+  <h4>📋 Lab Checklist <span style="font-weight:400;color:var(--text-muted);font-size:.8em;text-transform:none;letter-spacing:0">— check off steps as you go</span></h4>
+  {% for item in page.checklist %}
+  <div class="checklist-item" id="item-{{ lab_id }}-{{ item.id }}">
+    <input type="checkbox" id="chk-{{ lab_id }}-{{ item.id }}">
+    <label for="chk-{{ lab_id }}-{{ item.id }}">{{ item.text }}</label>
+  </div>
+  {%- endfor %}
+  <div class="checklist-progress">
+    <div class="progress-bar-track"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <span class="checklist-count"></span>
+  </div>
+</div>
+{% endif %}
+<div class="lab-content">
+{{ content }}
+</div>
+{% if page.writeup %}
+<div class="writeup-box">
+  <h4>📝 Lab Write-up Requirements</h4>
+  <ol>{% for q in page.writeup %}<li>{{ q }}</li>{% endfor %}</ol>
+</div>
+{% endif %}
+{{ lab_nav }}

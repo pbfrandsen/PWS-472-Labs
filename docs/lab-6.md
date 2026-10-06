@@ -1,4 +1,39 @@
-## Lab 6: PCA admix
+---
+layout: lab
+lab_num: 6
+title: "PCA and Admixture Analysis"
+blurb: "Call genotype likelihoods with ANGSD, build a PCA with PCAngsd, and run admixture analysis with NGSAdmix."
+keywords: "pca principal component analysis admixture angsd pcangsd ngsadmix bam bowtie2 siskin population structure"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Copy lab6 directory to your archive"
+  - id: 1
+    text: "Create bamlist.txt of BAM files"
+  - id: 2
+    text: "Submit ANGSD genotype likelihood job"
+  - id: 3
+    text: "Run PCAngsd to generate covariance matrix"
+  - id: 4
+    text: "Plot PCA with PCA_plot.r"
+  - id: 5
+    text: "Run NGSAdmix with K=2"
+  - id: 6
+    text: "Plot admixture with admix_plot.r"
+  - id: 7
+    text: "Rerun with K=3 and K=4"
+  - id: 8
+    text: "Download plots with scp"
+  - id: 9
+    text: "Write lab report (combined with Lab 7)"
+writeup:
+  - "Clear methods for each analysis and what the software does"
+  - "All generated plots included as figures"
+  - "What do you notice about population clustering in the PCA?"
+  - "Does the structure coincide with geography?"
+  - "What changes as K increases in the admixture analysis?"
+---
 
 For this lab, we will be using `bam` files output from `bowtie2` (a read-mapping program), calling variants with `ANGSD`, and then creating a PCA plot and an ADMIXTURE plot. Note that this is a very small sample size for an admixture plot, however, the process would be the same with a larger sample size.
 

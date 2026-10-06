@@ -1,4 +1,35 @@
-## Lab 2: Neutral Variation
+---
+layout: lab
+lab_num: 2
+title: "Neutral Variation"
+blurb: "Calculate Tajima's D, nucleotide diversity, and segregating sites for primate and stickleback datasets using DendroPy."
+keywords: "tajima d dendropy neutral variation segregating sites pairwise differences pi nucleotide diversity stickleback primate mitochondrial"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "SSH and activate the dendropy environment"
+  - id: 1
+    text: "Copy the lab2 data to your directory"
+  - id: 2
+    text: "Calculate pairwise differences for primate mitochondrial data"
+  - id: 3
+    text: "Calculate number of segregating sites"
+  - id: 4
+    text: "Calculate Tajima's D for primates"
+  - id: 5
+    text: "Load the stickleback dataset and split populations"
+  - id: 6
+    text: "Calculate all PopulationPairSummaryStatistics"
+  - id: 7
+    text: "Record values and answer write-up questions"
+writeup:
+  - "What were the scores for nucleotide diversity (π)?"
+  - "What about S (number of segregating sites)?"
+  - "What were the Tajima's D values?"
+  - "What inferences can you make from these values?"
+---
+
 In this lab we will take a look at a few sample files: One with mitochondrial data from primates and another with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x))
 
 We will be using the Python package `dendropy` to generate summary statistics about the two populations, including Tajima's D. 

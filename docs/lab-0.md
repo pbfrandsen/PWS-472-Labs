@@ -1,4 +1,28 @@
-## Lab 0: Introduction to the Supercomputer
+---
+layout: lab
+lab_num: 0
+title: "Introduction to the Supercomputer"
+blurb: "Log in to the BYU supercomputer, write a job script, submit it with SLURM, and check its status."
+keywords: "logging ssh supercomputer job script slurm sbatch squeue nano netid byu hpc cluster"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Log in to the BYU supercomputer via SSH"
+  - id: 1
+    text: "Open the Job Script Generator"
+  - id: 2
+    text: "Create a hello_there.job file"
+  - id: 3
+    text: "Submit the job with sbatch"
+  - id: 4
+    text: "Check job status with squeue"
+  - id: 5
+    text: "Receive email confirmation (optional)"
+  - id: 6
+    text: "Exit the supercomputer cleanly"
+---
+
 ### Logging into the Supercomputer
 Fill out the first three boxes with [your netID]@ssh.rc.byu.edu, and hit enter.
 

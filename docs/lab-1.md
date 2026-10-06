@@ -1,8 +1,38 @@
-## Lab 1: Estimating FST from empirical data
+---
+layout: lab
+lab_num: 1
+title: "Estimating FST from Empirical Data"
+blurb: "Use Biopython's GenePop wrapper to estimate FST, FIS, and FIT across simulated fish populations."
+keywords: "fst genepop biopython population genetics loci fis fit python conda easycontroller"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "SSH into the supercomputer"
+  - id: 1
+    text: "Copy sample_pop.txt to your lab1 folder"
+  - id: 2
+    text: "Activate the biopython conda environment"
+  - id: 3
+    text: "Load data with GenePop in Python"
+  - id: 4
+    text: "Run FST for all three population pairs"
+  - id: 5
+    text: "Run FST for all three populations together"
+  - id: 6
+    text: "Build your results table (FIS, FST, FIT)"
+  - id: 7
+    text: "Write your results and discussion paragraph"
+writeup:
+  - "A table with FIS, FST, and FIT for all population comparisons"
+  - "Is there any difference between/among populations given the FST values?"
+  - "What might the FST values suggest about the different habitat types?"
+  - "Why might that be?"
+---
 
 Navigate to [http://genepop.curtin.edu.au](http://genepop.curtin.edu.au). This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined [here](https://www.tutorialspoint.com/biopython/biopython_population_genetics.htm). 
 
-Click on the “Data input format” link under “Additional Help Files”. This will take you [here] (http://genepop.curtin.edu.au/help_input.html), which outlines the details about the file formats acceptable to GenePop. Read over the details and note the particulars about the file format.
+Click on the “Data input format” link under “Additional Help Files”. This will take you [here](http://genepop.curtin.edu.au/help_input.html), which outlines the details about the file formats acceptable to GenePop. Read over the details and note the particulars about the file format.
 
 Return to the home page and click on the [“Option 6 Help”](http://genepop.curtin.edu.au/Option6.html) to the right of option 6. Read through the sub options. I just want you to get a taste for the types of FST analyses that can be run. We will be doing a more “vanilla” analysis, but it is good for you to understand the other types of things that you can do.
 

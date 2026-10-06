@@ -1,4 +1,27 @@
-## Lab 4: Final Project Proposal
+---
+layout: lab
+lab_num: 4
+title: "Final Project Proposal"
+blurb: "Write a grant-style proposal for your conservation genomics final project, including data sources and planned analyses."
+keywords: "final project proposal organism question genetic data molecular markers accession conservation"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Choose an organism to study"
+  - id: 1
+    text: "Define your research question"
+  - id: 2
+    text: "Find genetic data online (NCBI/BOLD accessions)"
+  - id: 3
+    text: "Identify molecular markers and analyses"
+  - id: 4
+    text: "Write the Introduction paragraph"
+  - id: 5
+    text: "Write the Materials & Methods section"
+  - id: 6
+    text: "Connect the project to conservation"
+---
 
 This is the final project proposal. As we covered in class, your final project proposal is your lab assignment for the week. In your final project proposal, I'd like you to cover the following information:
 

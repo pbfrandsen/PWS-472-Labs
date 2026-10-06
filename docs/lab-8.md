@@ -1,4 +1,39 @@
-## Lab 8: Phylogenetics Tutorial using MEGA
+---
+layout: lab
+lab_num: 8
+title: "Phylogenetics with MEGA"
+blurb: "Download sequences from BOLD, align them in MEGA, and build maximum likelihood and parsimony trees."
+keywords: "mega phylogenetics maximum likelihood parsimony bold fasta alignment muscle tree phylogeny outgroup coi"
+# Checklist ids are the localStorage keys for student progress.
+# Never renumber an existing id; give new items a new, unused id.
+checklist:
+  - id: 0
+    text: "Download and install MEGA"
+  - id: 1
+    text: "Search BOLD for 9–10 sequences in a family"
+  - id: 2
+    text: "Build a FASTA file in a text editor"
+  - id: 3
+    text: "Open FASTA in MEGA and align with MUSCLE"
+  - id: 4
+    text: "Export alignment as MEGA format"
+  - id: 5
+    text: "Build Maximum Likelihood tree"
+  - id: 6
+    text: "Root tree on outgroup"
+  - id: 7
+    text: "Build Maximum Parsimony tree"
+  - id: 8
+    text: "Export both trees"
+  - id: 9
+    text: "Write lab report comparing trees"
+writeup:
+  - "What organism did you study?"
+  - "How did you retrieve the data and from where?"
+  - "What do you notice about the tree topology?"
+  - "Are the relationships as expected?"
+  - "Any evolutionary insights from the tree?"
+---
 
 In this tutorial you will make a phylogenetic tree using a program called MEGA with sequences
 downloaded from BOLD systems.
