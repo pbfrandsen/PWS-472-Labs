@@ -70,6 +70,8 @@ from dendropy.calculate import popgenstat
 
 Tajima's D compares two estimates of genetic diversity, π (the average number of pairwise differences) and S (the number of segregating sites), that should agree if a population has been a constant size and evolving neutrally. When the population's history departs from that, the two estimates come apart, and D moves away from zero.
 
+To get a feel for how π and S drive D, play with the [Tajima's D explorer](tajimas-d-explorer.html) before you start. It lets you change the number of sequences, segregating sites, and variant frequencies in an alignment and watch D respond.
+
 The trouble with real data is that we never know the true history, so we can't check whether D got it right. So we'll start with three simulated datasets where we do. Each one has 20 sequences, 600 bp long, sampled from a single, randomly mating population:
 
 * `pop_stable.nex`: the population has been the same size for its entire history.

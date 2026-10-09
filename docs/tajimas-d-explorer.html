@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tajima's D explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9F8; --panel:#FFFFFF; --ink:#16252B; --ink-2:#4E5E63; --ink-3:#A3AFB1; --rule:#D5DDDC;
+  --teal:#1F5F5B; --teal-soft:#E2EEEC;
+  --rare:#C8412F; --rare-soft:#F6DAD4; --shared:#7457B5; --shared-soft:#E6DEF5;
+  --sig:#F3E1DC; --ok:#E9EFEE;
+  --sans:"IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, "Courier New", monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101719; --panel:#172124; --ink:#E4ECEB; --ink-2:#9AAAAD; --ink-3:#56676A; --rule:#2C393C;
+    --teal:#7CC4BC; --teal-soft:#1D3533;
+    --rare:#EE7B67; --rare-soft:#4A2620; --shared:#A992E3; --shared-soft:#33294A;
+    --sig:#3D2622; --ok:#1E2A2C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101719; --panel:#172124; --ink:#E4ECEB; --ink-2:#9AAAAD; --ink-3:#56676A; --rule:#2C393C;
+  --teal:#7CC4BC; --teal-soft:#1D3533;
+  --rare:#EE7B67; --rare-soft:#4A2620; --shared:#A992E3; --shared-soft:#33294A;
+  --sig:#3D2622; --ok:#1E2A2C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+main{max-width:1080px;margin:0 auto;padding:2.5rem 1.25rem 3rem}
+h1{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:600;letter-spacing:-0.015em;line-height:1.1;margin:0 0 .5rem}
+.lede{color:var(--ink-2);max-width:68ch;margin:0 0 2rem}
+h2{font-size:1.05rem;font-weight:600;margin:0 0 .75rem}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem 2rem;margin-bottom:1rem}
+.ctl label{display:flex;justify-content:space-between;font-size:.92rem;color:var(--ink-2);margin-bottom:.3rem}
+.ctl output{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.ctl small{display:block;font-size:.8rem;color:var(--ink-2);margin-top:.15rem}
+input[type=range]{width:100%;accent-color:var(--teal);height:28px}
+.presets{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.75rem}
+button{font:inherit;font-size:.9rem;padding:.45rem .9rem;border-radius:6px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--teal)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.aln-wrap{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:1rem 1rem .75rem;margin-bottom:1.5rem}
+.aln-scroll{overflow-x:auto}
+table.aln{border-collapse:separate;border-spacing:1px;font-family:var(--mono);font-size:13px;margin:0 auto}
+.aln th,.aln td{width:17px;height:20px;text-align:center;padding:0;border-radius:3px}
+.aln th{font-weight:400;color:var(--ink-2);font-size:11px}
+.aln th.k{font-weight:600;color:var(--ink)}
+.aln td.name{width:auto;text-align:right;padding-right:8px;color:var(--ink-2);font-size:12px;white-space:nowrap}
+.aln td.ref{color:var(--ink)}
+.aln td.inv{color:var(--ink-3)}
+.aln th.seg{color:var(--ink)}
+.aln td.r{background:var(--rare-soft);color:var(--rare);font-weight:600}
+.aln td.s{background:var(--shared-soft);color:var(--shared);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:1.25rem;font-size:.85rem;color:var(--ink-2);margin-top:.6rem}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:1.5rem}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:1.1rem 1.2rem}
+.eq{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-family:var(--mono);font-size:.95rem;align-items:baseline}
+.eq dt{color:var(--ink-2)}
+.eq dd{margin:0;font-weight:600}
+.dval{font-family:var(--mono);font-size:3.2rem;font-weight:600;line-height:1;margin:.6rem 0 .2rem}
+.dval.sig{color:var(--rare)}
+.gauge{width:100%;height:auto;display:block;margin:.5rem 0 .4rem}
+.interp{margin:.25rem 0 0;max-width:60ch}
+details{margin-top:1rem;font-size:.9rem;color:var(--ink-2)}
+summary{cursor:pointer;color:var(--ink)}
+details .eq{font-size:.85rem;margin-top:.6rem}
+.sfs{display:flex;align-items:flex-end;gap:5px;height:140px;border-bottom:1px solid var(--rule);margin-top:.5rem}
+.sfs div{flex:1;border-radius:3px 3px 0 0;min-height:0;transition:height .15s}
+.sfsl{display:flex;gap:5px;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:4px}
+.sfsl span{flex:1;text-align:center}
+.try{margin:2rem 0 0;padding-left:1.2rem;max-width:72ch}
+.try li{margin-bottom:.5rem}
+footer{margin-top:2.5rem;font-size:.85rem;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:1rem}
+@media (prefers-reduced-motion: reduce){.sfs div{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Tajima's D explorer</h1>
+<p class="lede">Each row is a sequence and each column is a site in the alignment. Most sites are invariant (faded), the same in every sequence. At the segregating sites, a highlighted base means that sequence carries the variant. Move the sliders to see how the number of sites and the frequencies of the variants change π, S/a₁ and Tajima's D.</p>
+
+<section aria-label="Controls">
+  <div class="controls">
+    <div class="ctl">
+      <label for="n">Sequences sampled (n) <output id="nv" for="n"></output></label>
+      <input type="range" id="n" min="5" max="20" step="1" value="10">
+      <small>Changes a₁ and the range of possible frequencies</small>
+    </div>
+    <div class="ctl">
+      <label for="s">Segregating sites (S) <output id="sv" for="s"></output></label>
+      <input type="range" id="s" min="1" max="30" step="1" value="12">
+      <small>Raises π and S/a₁ together</small>
+    </div>
+    <div class="ctl">
+      <label for="p">Variant frequencies (sets π) <output id="pv" for="p"></output></label>
+      <input type="range" id="p" min="0" max="1000" step="1" value="350">
+      <small>Left: mostly rare variants. Right: mostly intermediate ones</small>
+    </div>
+    <div class="ctl">
+      <label for="iv">Invariant sites <output id="ivv" for="iv"></output></label>
+      <input type="range" id="iv" min="0" max="150" step="1" value="60">
+      <small>Lengthens the alignment without changing π, S or D</small>
+    </div>
+  </div>
+  <div class="presets">
+    <button type="button" id="b-rare">Mostly rare (sweep or growth)</button>
+    <button type="button" id="b-neutral">Neutral balance</button>
+    <button type="button" id="b-inter">Mostly intermediate (balancing selection)</button>
+  </div>
+</section>
+
+<section class="aln-wrap" aria-label="Sequence alignment">
+  <div class="aln-scroll"><table class="aln" id="aln"></table></div>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--rare)"></span>Singleton: carried by one sequence</span>
+    <span><span class="sw" style="background:var(--shared)"></span>Shared by two or more sequences</span>
+    <span><span class="sw" style="background:var(--ink-3)"></span>Invariant site</span>
+    <span>Above segregating sites: position, then number of carriers (k)</span>
+  </div>
+</section>
+
+<div class="grid2">
+  <section class="panel" aria-label="Tajima's D">
+    <h2>Tajima's D</h2>
+    <dl class="eq">
+      <dt>π</dt><dd id="o-pi"></dd>
+      <dt>S / a₁</dt><dd id="o-w"></dd>
+      <dt>d = π − S/a₁</dt><dd id="o-d"></dd>
+      <dt>Alignment length</dt><dd id="o-L"></dd>
+    </dl>
+    <div class="dval" id="o-D" aria-live="polite"></div>
+    <svg class="gauge" id="gauge" viewBox="0 0 600 64" role="img" aria-label="Tajima's D on a scale from minus 3 to plus 3"></svg>
+    <p class="interp" id="interp"></p>
+    <details>
+      <summary>Show the full calculation</summary>
+      <dl class="eq" id="calc"></dl>
+    </details>
+  </section>
+  <section class="panel" aria-label="Site frequency spectrum">
+    <h2>Site frequency spectrum</h2>
+    <p style="margin:0;font-size:.9rem;color:var(--ink-2)">How many sites have a variant carried by k sequences</p>
+    <div class="sfs" id="sfs"></div>
+    <div class="sfsl" id="sfsl"></div>
+    <p style="margin:.75rem 0 0;font-size:.9rem;color:var(--ink-2)">A site with k carriers differs in k × (n − k) of the n(n − 1)/2 pairs, so it adds most to π when k is near n/2. Every site adds the same 1/a₁ to S/a₁.</p>
+  </section>
+</div>
+
+<h2 style="margin-top:2rem">Things to try</h2>
+<ol class="try">
+  <li>Hold S fixed and drag the frequency slider from left to right. S/a₁ never moves, but π does, and D follows π.</li>
+  <li>Press “Mostly rare” with S = 3, then raise S to 30. The pattern is the same, but with more sites D moves well past −2.</li>
+  <li>Press “Neutral balance” and change n. a₁ grows slowly, so each extra sequence changes S/a₁ less than the one before.</li>
+  <li>Drag the invariant-sites slider. The alignment gets longer, but π, S and D stay put: invariant sites never differ between sequences. Per-site diversity (π divided by length, which some software reports) does shrink, but D is unchanged.</li>
+</ol>
+
+<footer><a href="lab-2.html" style="color:var(--teal)">← Back to Lab 2: Neutral Variation</a><br>PWS 472: neutral theory and Tajima's D. D is computed with Tajima's (1989) formula; variants are placed at random, so the alignment is a teaching sketch, not simulated data.</footer>
+</main>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var BASES = "ACGT", TRANSITION = {A:"G",G:"A",C:"T",T:"C"};
+  function rng(seed){ return function(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }; }
+  function shuffle(a, r){ for (var j = a.length - 1; j > 0; j--){ var k = Math.floor(r() * (j + 1)); var t = a[j]; a[j] = a[k]; a[k] = t; } return a; }
+
+  var cache = { n: 0 }, sites = [], order = [], invs = [];
+  function setup(n){
+    var r = rng(11 + n * 7); sites = []; var pos = 0;
+    for (var i = 0; i < 30; i++){
+      pos += 3 + Math.floor(r() * 30);
+      var ref = BASES[Math.floor(r() * 4)];
+      var alt = r() < 0.67 ? TRANSITION[ref] : BASES.replace(ref, "").replace(TRANSITION[ref], "")[Math.floor(r() * 2)];
+      var perm = []; for (var j = 0; j < n; j++) perm.push(j);
+      sites.push({ pos: pos, ref: ref, alt: alt, perm: shuffle(perm, r) });
+    }
+    order = shuffle(Array.from({length: 30}, function(_, i){ return i; }), r);
+    sites.forEach(function(x){ x.key = r(); });
+    invs = [];
+    for (var m = 0; m < 150; m++) invs.push({ base: BASES[Math.floor(r() * 4)], key: r() });
+    cache.n = n;
+  }
+
+  function states(n, S){
+    var P = n * (n - 1) / 2, km = Math.floor(n / 2), ks = [], out = [];
+    for (var i = 0; i < S; i++) ks.push(1);
+    var pi = function(a){ var t = 0; a.forEach(function(k){ t += k * (n - k); }); return t / P; };
+    out.push({ ks: ks.slice(), pi: pi(ks) });
+    var ord = order.filter(function(i){ return i < S; });
+    while (true){
+      var best = -1;
+      ord.forEach(function(i){ if (ks[i] < km && (best < 0 || ks[i] < ks[best])) best = i; });
+      if (best < 0) break;
+      ks[best]++; out.push({ ks: ks.slice(), pi: pi(ks) });
+    }
+    return out;
+  }
+
+  function stats(n, S, pi){
+    var a1 = 0, a2 = 0;
+    for (var i = 1; i < n; i++){ a1 += 1 / i; a2 += 1 / (i * i); }
+    var b1 = (n + 1) / (3 * (n - 1)), b2 = 2 * (n * n + n + 3) / (9 * n * (n - 1));
+    var c1 = b1 - 1 / a1, c2 = b2 - (n + 2) / (a1 * n) + a2 / (a1 * a1);
+    var e1 = c1 / a1, e2 = c2 / (a1 * a1 + a2);
+    var v = e1 * S + e2 * S * (S - 1), d = pi - S / a1;
+    return { a1: a1, a2: a2, e1: e1, e2: e2, v: v, w: S / a1, d: d, D: d / Math.sqrt(v) };
+  }
+
+  var st = [];
+  function nearest(t){
+    var lo = st[0].pi, hi = st[st.length - 1].pi, target = lo + (hi - lo) * t / 1000, bi = 0;
+    for (var i = 0; i < st.length; i++) if (Math.abs(st[i].pi - target) < Math.abs(st[bi].pi - target)) bi = i;
+    return st[bi];
+  }
+  var sign = function(x){ return (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(2); };
+
+  function draw(){
+    var n = +$("n").value, S = +$("s").value, I = +$("iv").value;
+    $("nv").textContent = n; $("sv").textContent = S; $("ivv").textContent = I;
+    if (n !== cache.n) setup(n);
+    st = states(n, S);
+    var cols = [];
+    for (var q = 0; q < S; q++) cols.push({ seg: q, key: sites[q].key });
+    for (q = 0; q < I; q++) cols.push({ inv: q, key: invs[q].key });
+    cols.sort(function(a, b){ return a.key - b.key; });
+    var L = cols.length;
+    var cur = nearest(+$("p").value), ks = cur.ks, r = stats(n, S, cur.pi);
+    $("pv").textContent = "π = " + cur.pi.toFixed(2);
+
+    var h = "<thead><tr><th></th>", i;
+    cols.forEach(function(c, ci){ h += c.seg === undefined ? "<th></th>" : "<th class='seg' scope='col'>" + (ci + 1) + "</th>"; });
+    h += "</tr><tr><th></th>";
+    cols.forEach(function(c){ h += c.seg === undefined ? "<th></th>" : "<th class='k' scope='col' title='" + ks[c.seg] + " carriers'>" + ks[c.seg] + "</th>"; });
+    h += "</tr></thead><tbody>";
+    for (var j = 0; j < n; j++){
+      h += "<tr><td class='name'>seq " + (j + 1) + "</td>";
+      cols.forEach(function(c){
+        if (c.seg === undefined){ h += "<td class='inv'>" + invs[c.inv].base + "</td>"; return; }
+        var x = sites[c.seg], carries = x.perm.indexOf(j) < ks[c.seg];
+        h += carries ? "<td class='" + (ks[c.seg] === 1 ? "r" : "s") + "'>" + x.alt + "</td>"
+                     : "<td class='ref'>" + x.ref + "</td>";
+      });
+      h += "</tr>";
+    }
+    $("aln").innerHTML = h + "</tbody>";
+
+    $("o-pi").textContent = cur.pi.toFixed(2);
+    $("o-w").textContent = r.w.toFixed(2) + "   (a₁ = " + r.a1.toFixed(2) + ")";
+    $("o-d").textContent = sign(r.d);
+    $("o-L").textContent = L + " sites (" + S + " variable)";
+    $("o-D").textContent = "D = " + sign(r.D);
+    $("o-D").classList.toggle("sig", Math.abs(r.D) >= 2);
+
+    var X = function(v){ return 30 + (Math.max(-3, Math.min(3, v)) + 3) / 6 * 540; };
+    var g = "<rect x='" + X(-3) + "' y='20' width='" + (X(-2) - X(-3)) + "' height='14' rx='3' fill='var(--sig)'/>" +
+            "<rect x='" + X(2) + "' y='20' width='" + (X(3) - X(2)) + "' height='14' rx='3' fill='var(--sig)'/>" +
+            "<rect x='" + X(-2) + "' y='20' width='" + (X(2) - X(-2)) + "' height='14' fill='var(--ok)'/>";
+    [-3, -2, -1, 0, 1, 2, 3].forEach(function(v){
+      g += "<text x='" + X(v) + "' y='52' text-anchor='middle' font-size='12' fill='var(--ink-2)' font-family='IBM Plex Mono, monospace'>" + (v > 0 ? "+" + v : v === 0 ? "0" : "−" + (-v)) + "</text>";
+    });
+    g += "<text x='" + X(-2.5) + "' y='13' text-anchor='middle' font-size='12' fill='var(--rare)'>excess rare</text>";
+    g += "<text x='" + X(2.5) + "' y='13' text-anchor='middle' font-size='12' fill='var(--rare)'>excess intermediate</text>";
+    g += "<line x1='" + X(r.D) + "' x2='" + X(r.D) + "' y1='15' y2='39' stroke='var(--ink)' stroke-width='4' stroke-linecap='round'/>";
+    $("gauge").innerHTML = g;
+
+    $("interp").textContent =
+      r.D <= -2 ? "π is well below S/a₁: there are more rare variants than neutrality predicts. This points to a recent selective sweep or population growth." :
+      r.D >= 2 ? "π is well above S/a₁: there are more intermediate-frequency variants than neutrality predicts. This points to balancing selection, population structure, or a bottleneck." :
+      r.D < -0.5 ? "π is somewhat below S/a₁, but within the range expected by chance under neutrality." :
+      r.D > 0.5 ? "π is somewhat above S/a₁, but within the range expected by chance under neutrality." :
+      "π and S/a₁ roughly agree, as expected under neutrality.";
+
+    $("calc").innerHTML =
+      "<dt>π per site = π / " + L + "</dt><dd>" + (cur.pi / L).toFixed(4) + "</dd>" +
+      "<dt>a₁ = Σ 1/i</dt><dd>" + r.a1.toFixed(3) + "</dd>" +
+      "<dt>a₂ = Σ 1/i²</dt><dd>" + r.a2.toFixed(3) + "</dd>" +
+      "<dt>e₁</dt><dd>" + r.e1.toFixed(4) + "</dd>" +
+      "<dt>e₂</dt><dd>" + r.e2.toFixed(4) + "</dd>" +
+      "<dt>Var(d) = e₁S + e₂S(S − 1)</dt><dd>" + r.v.toFixed(3) + "</dd>" +
+      "<dt>D = d / √Var(d)</dt><dd>" + sign(r.d) + " / " + Math.sqrt(r.v).toFixed(3) + " = " + sign(r.D) + "</dd>";
+
+    var km = Math.floor(n / 2), cnt = []; for (var k = 0; k <= km; k++) cnt.push(0);
+    ks.forEach(function(k){ cnt[k]++; });
+    var mx = Math.max.apply(null, cnt), bars = "", labs = "";
+    for (k = 1; k <= km; k++){
+      bars += "<div style='height:" + (mx ? cnt[k] / mx * 100 : 0) + "%;background:" + (k === 1 ? "var(--rare)" : "var(--shared)") + "' title='" + cnt[k] + " sites with k = " + k + "'></div>";
+      labs += "<span>" + k + "</span>";
+    }
+    $("sfs").innerHTML = bars; $("sfsl").innerHTML = labs;
+  }
+
+  function setNeutral(){
+    var n = +$("n").value, S = +$("s").value;
+    if (n !== cache.n) setup(n);
+    st = states(n, S);
+    var w = stats(n, S, 0).w, lo = st[0].pi, hi = st[st.length - 1].pi;
+    $("p").value = Math.round((w - lo) / (hi - lo) * 1000);
+    draw();
+  }
+  ["n", "s", "p", "iv"].forEach(function(id){ $(id).addEventListener("input", draw); });
+  $("b-rare").addEventListener("click", function(){ $("p").value = 0; draw(); });
+  $("b-inter").addEventListener("click", function(){ $("p").value = 1000; draw(); });
+  $("b-neutral").addEventListener("click", setNeutral);
+  setNeutral();
+})();
+</script>
+</body>
+</html>
