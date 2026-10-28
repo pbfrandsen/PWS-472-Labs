@@ -25,11 +25,6 @@ checklist:
     text: "Calculate Tajima's D within each stickleback population"
   - id: 7
     text: "Record values and answer write-up questions"
-writeup:
-  - "A table of π, S, and Tajima's D for the three simulated populations and for the stickleback data (pooled, EPAC only, and WPAC only)."
-  - "Did the sign of Tajima's D match what you expected for each simulated history? Explain why each history produces that pattern."
-  - "Why is Tajima's D for the pooled stickleback sample different from the values within each population?"
-  - "What can (and can't) Tajima's D tell you about a population's history?"
 ---
 
 In this lab we will take a look at a few sample files. The first three are simulated mitochondrial-like alignments, each from a single population whose demographic history we know. The last is a real dataset with two populations of stickleback fish that includes individuals from the Eastern Pacific and from the Western Pacific (you can look at the paper here: [https://doi.org/10.1111/j.1558-5646.1994.tb01348.x](https://doi.org/10.1111/j.1558-5646.1994.tb01348.x))
@@ -158,8 +153,14 @@ print("Tajima's D (WPAC only): %s" % popgenstat.tajimas_d(wpac))
 ```
 Compare these to the pooled value. Pooling sequences from distinct populations creates many variants at intermediate frequency (each one common in one population and rare in the other), and those raise π more than they raise S. The same thing happens, even more strongly, if you calculate Tajima's D on sequences from different species, which is why Tajima's D is only meaningful within a population.
 
+<div class="writeup-box" markdown="1">
+
+#### 📝 Lab Write-up
+
 Things to keep in mind for your lab write-up:
 1. What were the scores for nucleotide diversity, aka π (mean number of pairwise differences), S (the number of segregating sites), and Tajima's D for each dataset?
 2. Did the sign of Tajima's D match what you expected for each simulated history? Why does each history produce that pattern?
 3. Why is Tajima's D for the pooled stickleback sample different from the values within each population?
 4. What kind of inferences can we make from these values, and what are their limits?
+
+</div>

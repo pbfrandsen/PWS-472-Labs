@@ -23,11 +23,6 @@ checklist:
     text: "Build your results table (FIS, FST, FIT)"
   - id: 7
     text: "Write your results and discussion paragraph"
-writeup:
-  - "A table with FIS, FST, and FIT for all population comparisons"
-  - "Is there any difference between/among populations given the FST values?"
-  - "What might the FST values suggest about the different habitat types?"
-  - "Why might that be?"
 ---
 
 Navigate to [http://genepop.curtin.edu.au](http://genepop.curtin.edu.au). This is the website for the GenePop software. GenePop can do many different population genetics operations. However, today, we will be using GenePop to estimate FST values from empirical data. We are going to be using the version that comes packed with Biopython. We will get started by doing some of the things outlined [here](https://www.tutorialspoint.com/biopython/biopython_population_genetics.htm). 
@@ -106,6 +101,10 @@ This will output the three populations' averaged FIS, FST, and FIT (in that orde
 3. Estimate FST values between Pop2 and Pop3
 4. Estimate FST values for all three populations
 
+<div class="writeup-box" markdown="1">
+
+#### 📝 Lab Write-up
+
 Your lab write-up should include the following:
 
 1. A table that contains the FIS, FST, and FIT values for all the comparisons
@@ -116,5 +115,7 @@ Here are some questions for you to consider when you are writing your paragraph.
 1. Is there any difference between and among these populations, given the FST values that you have estimated?
 2. What might this suggest about the different habitat types?
 3. Why might that be?
+
+</div>
 
 PS: If you want to exit from the Python, use `quit()` or `exit()`. If you want to exit the `(biopython)`, use `conda deactivate` .

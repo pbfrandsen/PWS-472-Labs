@@ -26,13 +26,7 @@ checklist:
   - id: 8
     text: "Download plots with scp"
   - id: 9
-    text: "Write lab report (combined with Lab 7)"
-writeup:
-  - "Clear methods for each analysis and what the software does"
-  - "All generated plots included as figures"
-  - "What do you notice about population clustering in the PCA?"
-  - "Does the structure coincide with geography?"
-  - "What changes as K increases in the admixture analysis?"
+    text: "Add Lab 6 to your combined Labs 5-7 report"
 ---
 
 In Lab 5, you assembled the genome of _Lednia tetonica_. In this lab, we will use that genome to ask whether stoneflies living in different streams in the Teton Range are genetically distinct from one another. If populations are isolated, with little gene flow between them, each one may need to be managed as its own unit, and the loss of a single stream could mean the loss of unique genetic diversity.
@@ -164,8 +158,11 @@ What do you notice?
 ### 8. Download the plots with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
-### 9. For the Lab write-up
-This lab will be combined with lab 7 into a single lab write-up (double the amount of points and double the length). However, feel free to get started with this one. Consider the following as you write it up:
+<div class="writeup-box" markdown="1">
+
+#### 📝 Lab Write-up (combined with Labs 5 and 7)
+
+This lab is part of the single combined write-up for Labs 5-7 (see the write-up box at the end of Lab 7 for how to put the report together). Feel free to get started on the Lab 6 part now. Consider the following as you write it up:
 - Your lab write-up should contain clear methods on which analyses you performed and why
 - When introducing each method, you should give a short explanation of what the software is actually doing
 - Any plots that you generate should be included as figures
@@ -175,3 +172,5 @@ For the Discussion:
 - For the admixture analysis, what do you see at `K` = 2? What changes as you increase `K` to 3 and 4? Do the extra ancestry components correspond to real, separate populations? (_Hint:_ the six nymphs from one stream may include close relatives, such as siblings. How could that affect an admixture analysis with so few individuals?) Is there any evidence of gene flow (mixed ancestry) between Skillet Glacier and Wind Cave?
 - We only used one chromosome (about 7% of the genome) and two of the four sampled populations. How might your results change with the whole genome? With all four populations? Note that two of the four populations in the full study, Cloud Veil and Dartmouth Basin, are only a few kilometers apart. Would you expect them to be as distinct as Skillet Glacier and Wind Cave?
 - What do your results mean for the conservation of _L. tetonica_? If the populations in different streams exchange few or no migrants, what could happen if one stream warms or its glacier disappears?
+
+</div>

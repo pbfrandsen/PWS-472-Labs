@@ -25,6 +25,6 @@ This repository houses the computational labs for PWS 472, Conservation Genomics
 
 Each lab is a Markdown file, `docs/lab-N.md`. Edit it and push; GitHub Pages rebuilds the site with Jekyll.
 
-The front matter at the top of each file holds the page title, the one-line blurb (also used on the home page card), search keywords, the checklist, and the write-up questions. Checklist `id`s are the keys for students' saved progress, so never renumber an existing one; give a new item a new, unused id.
+The front matter at the top of each file holds the page title, the one-line blurb (also used on the home page card), search keywords, and the checklist. The write-up questions are in the page body, inside a `<div class="writeup-box" markdown="1">` block at the end of each lab. Checklist `id`s are the keys for students' saved progress, so never renumber an existing one; give a new item a new, unused id.
 
 The page chrome lives in `docs/_layouts/` (`default.html` for every page, `lab.html` for labs), and styles and scripts in `docs/assets/`.

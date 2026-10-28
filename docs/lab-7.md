@@ -20,12 +20,7 @@ checklist:
   - id: 6
     text: "Download PSMC plot"
   - id: 7
-    text: "Write combined lab 6+7 report"
-writeup:
-  - "Describe the PSMC trajectory: when did Ne rise and fall?"
-  - "How does your curve compare to the whole-genome curves from the full study?"
-  - "How do the mutation rate and generation time assumptions affect the plot?"
-  - "Why is a single chromosome less reliable than the whole genome?"
+    text: "Write and turn in your combined Labs 5-7 report"
 ---
 
 In Lab 6, we used many individuals to look at how genetic variation is distributed _among_ populations today. In this lab, we will use the genome of a single individual to look back in time.
@@ -93,7 +88,11 @@ This creates `SG_04_psmc.pdf` (and `SG_04_psmc.eps`). The x-axis is time before 
 ### 4. Download the plot with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
-### Key takeaways for the lab write-up (to be combined with lab 6)
+<div class="writeup-box" markdown="1">
+
+#### 📝 Lab Write-up (combined with Labs 5 and 6)
+
+This lab completes the combined write-up for Labs 5-7. For the Lab 7 part, consider the following:
 
 - Describe your `PSMC` curve. When was the effective population size of this lineage at its largest? When did it decline?
 - In the full study, which used the whole genome, the `PSMC` curves of all 24 individuals followed a similar pattern. _N<sub>e</sub>_ peaked at about 250,000 roughly one million years ago, declined to about 80,000 by roughly 100,000 years ago, then rose and fell again between 100,000 and 10,000 years ago. How does your curve compare? What parts are similar, and what parts differ?
@@ -101,3 +100,13 @@ See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 - How would your plot change if the true mutation rate of stoneflies were twice the _Drosophila_ rate? If the generation time were 1 year instead of 1.5? Which axes would shift, and in which direction?
 - The Teton Range was heavily glaciated during the last glacial period, and the glaciers retreated after about 15,000 years ago. `PSMC` has little power in the most recent ~10,000-20,000 years. What does that mean for using `PSMC` to understand how recent warming and glacier loss are affecting _L. tetonica_? What other data or methods could address that?
 - **Optional:** If you have time, repeat steps 1-3 for a Wind Cave individual (for example, WC_05) and compare the two curves. You will need to copy its `BAM` file, and adjust `-d` and `-D` for its depth of coverage (WC_05 has about 17x on `LtChr4`).
+
+**Putting the combined report together.** Turn in one report for Labs 5, 6, and 7 (triple the amount of points and triple the length). Organize it as a single study of _L. tetonica_ rather than three separate reports:
+
+- **Introduction:** one introduction to _L. tetonica_, why it is a conservation concern, and the questions that the three labs address.
+- **Methods and Results:** a section for each lab, with clear methods (including the commands and a short explanation of what each piece of software does) and all of your tables and figures.
+- **Discussion:** answer the questions from each lab, and then tie them together:
+  - Labs 6 and 7 mapped reads to the chromosome-level reference genome. What would have been harder, or impossible, if you had used one of the class contig assemblies from Lab 5 as the reference instead? What if you had used the 15x assembly?
+  - Together, what do population structure (Lab 6) and long-term population size (Lab 7) tell you about the history of _L. tetonica_ and about how it should be managed as its glaciers disappear?
+
+</div>

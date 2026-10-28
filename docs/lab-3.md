@@ -21,12 +21,6 @@ checklist:
     text: "Determine the likely biome of origin"
   - id: 6
     text: "Write your lab report"
-writeup:
-  - "What are DNA barcodes and why are you using them here?"
-  - "Are the identified species from the same place? Possible explanations?"
-  - "Which biome do you think your samples came from?"
-  - "Were there invasive species? Could metabarcoding detect invasives?"
-  - "How well do the barcodes work for identifying these species?"
 ---
 
 Using the Barcode of Life Data System to identify unknown samples of DNA
@@ -39,6 +33,10 @@ Your data file is on the content tab of Learning Suite under Lab Tutorials > Lab
 
 You will see several sequences your own file. Your job is to use the BOLD identification engine to identify each of these unknowns. For the purposes of the assignment, assume that these unknowns all came from samples from a specific biome somewhere in North America. Part of your objective is to try to figure out which biome they were derived from and approximately where in North America they could have come from. Be careful because there could be invasive species or contaminant sequences in your list.
 
+<div class="writeup-box" markdown="1">
+
+#### 📝 Lab Write-up
+
 In your lab report, you should report about each of the unknown species in a table. This table should include the probability of placement, the geographical location of the most closely related individuals in the database, and the species name that matched. Each of you have a unique set of sequences and you will be graded, partly, on whether your identifications are correct.
 
 In addition to identifying the details above for each of the unknowns, for one of them, let's go more in depth. When you identify the species, there is a small icon under “Tree.” Click on that icon. You should receive a pop-up and then be able to view the tree. What do you notice about the distance to other species? Include this figure in your lab report along with some discussion on what you notice.
@@ -49,3 +47,5 @@ A few things to think about in preparing your lab report:
 3.	Which biome do you think your samples came from (e.g., forest, marine, freshwater, alpine, desert)
 4.	Did you notice anything about the health of the ecosystem? Were there invasive species? Could metabarcoding be a good way to detect the spread of invasive species.
 5.	In these samples, how well do the barcodes work for identifying these species?
+
+</div>

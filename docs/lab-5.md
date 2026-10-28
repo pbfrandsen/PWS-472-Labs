@@ -28,13 +28,7 @@ checklist:
   - id: 8
     text: "Compare assemblies across coverages and to other stonefly genomes"
   - id: 9
-    text: "Write your own lab report with all required details"
-writeup:
-  - "Full methods with commands for each software"
-  - "Estimated HiFi PacBio coverage (total bp reads ÷ total bp assembly)"
-  - "Class table comparing the 15x, 20x, and 30x assemblies with the full-data Lednia tetonica assembly (collaborative unpublished work)"
-  - "Comparison to Lednia tumana (GCA_003287335.1) and Nemoura dubitans (GCA_921293005.1)"
-  - "Differences in sequencing technology, coverage, and contiguity"
+    text: "Start your own combined Labs 5-7 report"
 ---
 
 In this lab, we will use PacBio HiFi sequencing to assemble the genome of _Lednia tetonica_, the Teton meltwater stonefly. _L. tetonica_ is found only in a handful of cold, glacier- and snowmelt-fed streams in the Teton Range of Grand Teton National Park, Wyoming. Because it depends on very cold water, it is vulnerable to warming and to the loss of the glaciers that feed its streams. Its close relative, _Lednia tumana_ from Glacier National Park, is listed as threatened under the U.S. Endangered Species Act. A high-quality reference genome is the foundation for the population genomic analyses we will do in Labs 6 and 7.
@@ -186,12 +180,19 @@ If more than one group assembled the same read set, did they get the same answer
 
 For each one, note the sequencing technology, the reported coverage, and the contig N50.
 
-### Items to include in your lab write-up
+<div class="writeup-box" markdown="1">
 
-You worked as a group, but each member should write their own lab report.
+#### 📝 Lab Write-up (combined with Labs 6 and 7)
+
+Labs 5, 6, and 7 all use _Lednia tetonica_, so you will write them up together as a single report, which you will turn in after Lab 7 (triple the amount of points and triple the length). See the write-up box at the end of Lab 7 for how to put the report together. Get started on the Lab 5 part now, while the details are fresh. You worked as a group for this lab, but each member should write their own report.
+
+For the Lab 5 part, include:
+
 
 - Full details of the methods that you used, including commands to each piece of software.
 - The amount of coverage of HiFi PacBio data that your group used (_Hint:_ you can estimate this by dividing the total number of base pairs in the reads by the total number of base pairs in your assembly).
 - The contiguity stats and `BUSCO` results of the 15x, 20x, and 30x assemblies, in a table. How do contiguity and completeness change as coverage increases? How do they compare to the contig assembly made with ~109x? What does that tell you about how much HiFi coverage you need for a good assembly? (_Hint:_ look at the total length and the duplicated `BUSCO`s, not just the N50. _L. tetonica_ is diploid, so the two copies of each chromosome differ at many sites. Why might an assembler with too little data keep both copies of some regions?)
 - How do the class assemblies compare to the _Lednia tumana_ and _Nemoura dubitans_ assemblies on GenBank? Examine the differences in sequencing technology, the differences in coverage, and the differences in contiguity.
 - Your `BUSCO` results. What do they tell you about the completeness of your assembly?
+
+</div>

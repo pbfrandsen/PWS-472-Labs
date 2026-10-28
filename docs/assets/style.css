@@ -590,8 +590,9 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 8px;
 }
-.writeup-box ol { margin-left: 1.2rem; }
-.writeup-box li { margin-bottom: .3rem; font-size: .9rem; color: #4c1d95; }
+.writeup-box ol, .writeup-box ul { margin: .4rem 0 .8rem 1.2rem; }
+.writeup-box p, .writeup-box li { margin-bottom: .4rem; font-size: .9rem; color: #4c1d95; }
+.writeup-box > :last-child { margin-bottom: 0; }
 
 /* ─── Footer ─────────────────────────────────────────────────── */
 .site-footer {

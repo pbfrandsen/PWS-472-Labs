@@ -35,10 +35,4 @@ layout: default
 <div class="lab-content">
 {{ content }}
 </div>
-{% if page.writeup %}
-<div class="writeup-box">
-  <h4>📝 Lab Write-up Requirements</h4>
-  <ol>{% for q in page.writeup %}<li>{{ q }}</li>{% endfor %}</ol>
-</div>
-{% endif %}
 {{ lab_nav }}
