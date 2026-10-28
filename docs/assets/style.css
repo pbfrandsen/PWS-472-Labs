@@ -403,6 +403,30 @@ a:hover { text-decoration: underline; }
   font-style: italic;
 }
 
+/* tables: display:block lets a wide table scroll sideways on narrow screens */
+.lab-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1rem 0 1.5rem;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.lab-content th, .lab-content td {
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.lab-content th {
+  background: var(--teal-pale);
+  color: var(--navy);
+  font-weight: 600;
+}
+.lab-content td:not(:first-child) { white-space: nowrap; }
+.lab-content tbody tr:nth-child(even) { background: var(--bg); }
+
 /* inline code */
 .lab-content code {
   background: #eef2f7;
