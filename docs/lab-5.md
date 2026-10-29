@@ -33,36 +33,36 @@ checklist:
 
 In this lab, we will use PacBio HiFi sequencing to assemble the genome of _Lednia tetonica_, the Teton meltwater stonefly. _L. tetonica_ is found only in a handful of cold, glacier- and snowmelt-fed streams in the Teton Range of Grand Teton National Park, Wyoming. Because it depends on very cold water, it is vulnerable to warming and to the loss of the glaciers that feed its streams. Its close relative, _Lednia tumana_ from Glacier National Park, is listed as threatened under the U.S. Endangered Species Act. A high-quality reference genome is the foundation for the population genomic analyses we will do in Labs 6 and 7.
 
-The full HiFi dataset for this genome is about 46.3 billion base pairs (6.4 million reads) from two PacBio Revio SMRT cells. That is far more than we need for a class exercise, so I have randomly subsampled the reads to three different depths of coverage: about **15x**, **20x**, and **30x**. Each smaller set is a subset of the larger ones.
+The full HiFi dataset for this genome comprises ~46.3 billion base pairs (6.4 million reads) from two PacBio Revio SMRT cells. That is far more than we need for a class exercise, so I have randomly subsampled the reads to three different depths of coverage: about **15x**, **20x**, and **30x**. Each smaller set is a subset of the larger ones.
 
-Genome assembly is the most computationally demanding step in this course, so you will do this lab in **groups of two or three**. Each group will assemble one of the three read sets (I will assign your group a coverage), measure the coverage and contiguity of its assembly, and assess gene completeness with BUSCO. At the end, we will pool every group's results into a class table so that you can see how the amount of data affects the assembly, and compare your assemblies to the assembly made from the full dataset (collaborative unpublished work) and to other stonefly genomes on GenBank.
+Genome assembly is the most computationally demanding step in this course, so you will do this lab in **groups of four or five**. Each group will assemble one of the three read sets (I will assign your group a coverage), measure the coverage and contiguity of its assembly, and assess gene completeness with BUSCO. At the end, we will pool every group's results into a class table so that you can see how the amount of data affects the assembly, and compare your assemblies to the assembly made from the full dataset (collaborative unpublished work) and to other stonefly genomes on GenBank.
 
-Everyone in the group should follow along with every step and understand every command, but only one member needs to submit each job. Your lab write-up is still your own.
+Everyone in your group should follow along with every step and understand every command, but only one member needs to submit each job. You should still complete your lab write-up on your own.
 
 ### Step 1: Login to the supercomputer, create a group folder, and link the raw data
 
 Open the command prompt or the terminal application and `ssh` into the supercomputer.
 
-Your group will work in a shared folder in the class directory, so that every member can see the same files. Pick a short group name with no spaces (for example, the first names of your members, like `anna_ethan_iris`). **One member** of the group creates the folder and gives the rest of the group permission to write in it:
+Your group will work in a shared folder in the class directory, so that every member can see the same files. Pick a short group name with no spaces (for example, the first names of your members, like `anna_ethan_iris`). **One member** of the group should create the folder and grant the rest of the group permission to write in it (substitute your own name in these commands):
 ```
 cd ~/groups/fslg_pws472/nobackup/archive/lab5_groups
 mkdir anna_ethan_iris
 chmod g+w anna_ethan_iris
 ```
-**Every member** can then move into the group folder (use your own group name):
+**Every member** should then be able to change directories into the group folder (use your own group name):
 ```
 cd ~/groups/fslg_pws472/nobackup/archive/lab5_groups/anna_ethan_iris
 ```
 
-The read files are large (the 30x compressed `FASTQ` is about 3.7 GB and the 30x `FASTA` is about 12.8 GB), so instead of copying them we will create _symbolic links_ to them. A symbolic link is a small file that points to the real file somewhere else, so every program can read it as if it were in your folder. We will use the `FASTQ` file for the assembly and the `FASTA` file to estimate the average read length and the total number of base pairs in the raw data.
+The read files are large (the 30x compressed `FASTQ` is about 3.7 GB and the 30x `FASTA` is about 12.8 GB), so instead of copying them we will create _symbolic links_. A symbolic link is a small file that points to the real file somewhere else, but allows every programto read it as if it were in your folder. We will use the `FASTQ` file for the assembly and the `FASTA` file to estimate the average read length and the total number of base pairs in the raw data.
 
-The member who created the folder links your group's read set. Replace `15x` in both lines with your group's assigned coverage (`15x`, `20x`, or `30x`). Naming the links `reads.fastq.gz` and `reads.fasta` means that every command after this one is the same for all groups.
+The group member who created the folder should create links to your group's read set. When doing so, replace `15x` in both lines with your group's assigned coverage (`15x`, `20x`, or `30x`). Naming the links `reads.fastq.gz` and `reads.fasta` means that every command after this one is the same for all groups.
 ```
 ln -s ~/groups/fslg_pws472/nobackup/archive/lab5_lednia/data/lednia_hifi_15x.fastq.gz reads.fastq.gz
 ln -s ~/groups/fslg_pws472/nobackup/archive/lab5_lednia/data/lednia_hifi_15x.fasta reads.fasta
 ls -l
 ```
-The `ls -l` output shows an arrow (`->`) pointing to where each file really lives. Check that it points to your group's coverage.
+The `ls -l` output shows an arrow (`->`) pointing to where each file actually resides. Double check that it points to your group's correct coverage level.
 
 ### Step 2: Evaluate the raw reads with the assembly stats script
 
@@ -77,7 +77,7 @@ cat read_stats.txt
 ```
 The 30x `FASTA` file contains about 1.76 million reads and takes about two minutes; the smaller sets are faster.
 
-You should see two different `JSON` objects entitled "Contig Stats:" and "Scaffold Stats:". They will be the same values and, for this part of the exercise, what we are actually measuring are "Read Stats:". Take note of the total number of base pairs and the average read lengths. You'll use these later.
+You should see two different `JSON` objects entitled "Contig Stats:" and "Scaffold Stats:". They will be the same values and, for this part of the exercise, we are actually measuring "Read Stats:". Take note of the total number of base pairs and the average read lengths. You'll use these later.
 
 ### Step 3: Prepare a job script for assembly and start your assembly job
 
@@ -87,7 +87,7 @@ source ~/groups/fslg_pws472/.bashrc
 conda activate hifiasm
 hifiasm -o lednia.asm -t 24 reads.fastq.gz
 ```
-Compare your job scripts with your group and fix any differences. Then **one member** saves their script as `hifiasm.job` in the group folder and submits it with `sbatch`:
+Compare your job scripts with your group and fix any differences. Then **one group member** should save their script as `hifiasm.job` in the group folder and submit it with `sbatch`:
 ```
 sbatch hifiasm.job
 ```
@@ -97,7 +97,7 @@ The member who submitted the job can check on it using `squeue -u <username>`. I
 
 ### Step 4: Generate a new job file for your `BUSCO` run
 
-A **different member** from the one who submitted the assembly creates this job. Create a new job script using the [Job Script Generator](https://rc.byu.edu/documentation/slurm/script-generator). Make sure that the job is limited to one node, select 8 processor cores, 4 GB of RAM per processor, and a wall-time of 2 hours. Copy the resulting script into a new job file called `busco.job` in the group folder.
+A **different group member** from the person who submitted the assembly should prepare this job for submission. Create a new job script using the [Job Script Generator](https://rc.byu.edu/documentation/slurm/script-generator). Make sure that the job is limited to one node, select 8 processor cores, 4 GB of RAM per processor, and a wall-time of 2 hours. Copy the resulting script into a new job file called `busco.job` in the group folder.
 
 Copy the `busco_downloads` folder from the `pws472` class folder to your group folder
 ```
@@ -144,7 +144,7 @@ Complete BUSCOs include both single-copy and duplicated BUSCOs. Fragmented BUSCO
 
 ### Step 8: Add your results to the class table
 
-Every group adds one line to a shared table, `class_results.tsv`, in the `lab5_groups` folder. **One member** runs the command below from your group folder, after replacing each value in capital letters:
+Every group adds one line to a shared table, `class_results.tsv`, in the `lab5_groups` folder. **One member** from each group should run the command below from your group folder, after replacing each value in capital letters:
 
 - `GROUP`: your group name
 - `COV`: your coverage (`15x`, `20x`, or `30x`)
@@ -161,7 +161,7 @@ column -t ../class_results.tsv
 
 ### Step 9: Compare your assembly to the other assemblies
 
-Your assembly is a _contig_ assembly: each sequence is a stretch of genome that `hifiasm` could reconstruct without gaps. The _L. tetonica_ reference genome (collaborative unpublished work) started the same way, but used all of the HiFi data (about 109x coverage). Hi-C data, which captures which parts of the genome are physically close together in the nucleus, were then used to order and orient the contigs into 10 chromosome-length scaffolds. We will use that chromosome-level assembly as the reference genome in Labs 6 and 7.
+Your assembly is a _contig_ assembly: each sequence is a stretch of genome that `hifiasm` could reconstruct without gaps. The _L. tetonica_ reference genome (collaborative unpublished work) was also initially a contig-level assembly, but made use of all of the HiFi data (about 109x coverage). Hi-C data, which captures which parts of the genome are physically close together in the nucleus, were then used to order and orient the contigs into 10 chromosome-length scaffolds. We will use that chromosome-level assembly as the reference genome in Labs 6 and 7.
 
 Using the class table, fill in the first three rows of a table like this one:
 

@@ -29,18 +29,18 @@ checklist:
     text: "Add Lab 6 to your combined Labs 5-7 report"
 ---
 
-In Lab 5, you assembled the genome of _Lednia tetonica_. In this lab, we will use that genome to ask whether stoneflies living in different streams in the Teton Range are genetically distinct from one another. If populations are isolated, with little gene flow between them, each one may need to be managed as its own unit, and the loss of a single stream could mean the loss of unique genetic diversity.
+In Lab 5, you assembled the genome of _Lednia tetonica_. In this lab, we will use that genome to ask whether stoneflies living in different streams in the Teton Range are genetically distinct from one another. If the populations are isolated, with little gene flow between them, each one may need to be managed as its own unit, and the loss of a single stream could mean the loss of unique genetic diversity.
 
-The full study (collaborative unpublished work) sequenced 24 nymphs, six from each of four streams in Grand Teton National Park, with Illumina short reads. Each individual's reads were mapped to the chromosome-level _L. tetonica_ reference genome with `minimap2`. We will use two of those populations, which are about 25 km apart:
+In the full study, we sequenced 24 nymphs, six from each of four streams in Grand Teton National Park, with Illumina short reads. Each individual's reads were mapped to the chromosome-level _L. tetonica_ reference genome with `minimap2`. We will use two of those populations, which are about 25 km apart:
 
 | Population | Code | Latitude | Longitude | Individuals |
 |---|---|---|---|---|
 | Skillet Glacier | SG | 43.8389 | -110.7586 | SG_01 to SG_06 |
 | Wind Cave | WC | 43.6655 | -110.9561 | WC_01 to WC_06 |
 
-To keep run times short, I have kept only the reads that mapped to **chromosome 4** (`LtChr4`, about 30.2 Mb, or roughly 7% of the genome) and marked PCR duplicates with `samtools markdup`. Each individual has about 17-26x coverage on this chromosome after duplicates are removed. You will call genotype likelihoods with `ANGSD`, and then create a PCA plot and an admixture plot. Twelve individuals is a small sample for an admixture analysis, but the process would be the same with a larger sample size.
+To keep run times short, I have kept only the reads that mapped to **chromosome 4** (`LtChr4`, comprising 30.2 Mb, or roughly 7% of the genome) and marked PCR duplicates with `samtools markdup`. Each individual from the two populations had about 17-26x coverage on this chromosome after duplicates were removed. In this lab, you will call genotype likelihoods with `ANGSD`, and then create a PCA plot and an admixture plot. Twelve individuals is a small sample for an admixture analysis, but the process would be the same with a larger sample size.
 
-Reminder, that you should create your own folder in which to run these analyses, ideally in your `~/nobackup/archive` directory (rather than in the class shared directory).
+Please create your own folder to run these analyses, ideally in your `~/nobackup/archive` directory (rather than in the class shared directory).
 
 ### 1. Create a `lab6` directory and copy the `angsd` folder
 The shared `lab6_lednia` folder has three folders: `genome` (the `LtChr4` reference sequence), `bams` (one `BAM` file per individual, about 2.9 GB in total), and `angsd` (the scripts and sample list you will use below). The `BAM` files are large, so we will read them directly from the shared folder and copy only the `angsd` folder.
@@ -54,16 +54,16 @@ ls ~/groups/fslg_pws472/nobackup/archive/lab6_lednia/bams
 
 ### 2. Generate genotype likelihoods with `ANGSD`
 
-With 20-30x coverage per individual, we could call genotypes directly, but `ANGSD` instead works with _genotype likelihoods_: the probability of the sequencing data under each possible genotype. This lets it carry the uncertainty from sequencing errors and low depth into the downstream analyses, rather than forcing a single best-guess genotype at every site.
+With 20-30x coverage per individual, we could call genotypes directly, but `ANGSD` instead works with _genotype likelihoods_: the probability of the sequencing data under each possible genotype. This allows us to account for uncertainty from sequencing errors and low depth in the downstream analyses, rather than forcing the calling of a single best-guess genotype.
 
-We're going to create a file called `bamlist.txt` in the `angsd` directory. This file will have the paths to all of the bam files that we will use for this step.
+We're going to create a file called `bamlist.txt` in the `angsd` directory. This file will include the paths to all of the bam files that we will use for this step.
 
 You can create this list with the command:
 ```
 cd angsd
 ls ~/groups/fslg_pws472/nobackup/archive/lab6_lednia/bams/*.LtChr4.bam > bamlist.txt
 ```
-When you create it, if you view it with `cat`, it should list 12 files ending like the following (the start of each path will include your home directory):
+After creating the file, if you view it with `cat`, it should list 12 files ending like the following (the start of each path will include your home directory):
 ```
 .../lab6_lednia/bams/SG_01.LtChr4.bam
 .../lab6_lednia/bams/SG_02.LtChr4.bam
@@ -91,21 +91,21 @@ angsd -GL 1 -out lednia_PCA -nThreads $SLURM_NPROCS -doGlf 2 -doMajorMinor 1 -SN
 Here is what each option does:
 
 - `-GL 1` calculates genotype likelihoods with the SAMtools model.
-- `-doGlf 2` writes the likelihoods in `BEAGLE` format, which `PCAngsd` and `NGSadmix` read.
+- `-doGlf 2` writes the likelihoods in `BEAGLE` format, which is required for `PCAngsd` and `NGSadmix`.
 - `-doMajorMinor 1` and `-doMaf 1` infer the major and minor allele and estimate the allele frequency at each site.
 - `-SNP_pval 1e-6` keeps only sites that are very likely to be variable (SNPs).
-- `-minMapQ 30` and `-minQ 20` ignore reads that map ambiguously and bases with low quality. More than half of the _L. tetonica_ genome is repetitive, so ignoring ambiguously mapped reads matters here.
+- `-minMapQ 30` and `-minQ 20` ignore reads that map ambiguously and bases with low quality. More than half of the _L. tetonica_ genome is repetitive, so ignoring ambiguously mapped reads is important.
 - `-minInd 10` keeps only sites where at least 10 of the 12 individuals have data.
 
 To submit the job, use:
 ```
 sbatch angsd_geno_like.job
 ```
-It took about 5 minutes when I tested it. When it is complete, look at the files in your directory. You should have three new files: `lednia_PCA.arg`, `lednia_PCA.beagle.gz`, and `lednia_PCA.mafs.gz`. Count the number of SNPs (one line per SNP, plus a header line) with:
+It took about 5 minutes when I tested it. When it is complete, take a look at the files in your directory. You should have three new files: `lednia_PCA.arg`, `lednia_PCA.beagle.gz`, and `lednia_PCA.mafs.gz`. Count the number of SNPs (one line per SNP, plus a header line) with:
 ```
 zcat lednia_PCA.beagle.gz | tail -n +2 | wc -l
 ```
-You should find roughly 180,000 SNPs out of the roughly 28 million sites on `LtChr4` that had enough data to analyze. For the next step, we're going to generate a covariance matrix using the beagle file (which contains the genotype likelihoods) using `PCAngsd`.
+You should find roughly 180,000 SNPs out of the roughly 28 million sites on `LtChr4`. For the next step, we're going to generate a covariance matrix using the beagle file (which contains the genotype likelihoods) using `PCAngsd`.
 
 ### 3. Generate a covariance matrix using `PCAngsd`
 
@@ -125,7 +125,7 @@ conda deactivate
 conda activate r
 Rscript PCA_plot.r
 ```
-This creates `PCA_lednia.png`. Each point is one individual, colored by population, and the axis labels show the percentage of the genetic variation explained by each principal component.
+This script will create a new figure called `PCA_lednia.png`. Each point represents a single individual, which is colored by its population. The axis labels reveal the percentage of the genetic variation explained by each principal component.
 
 ### 5. Run Admixture analysis with `NGSAdmix`
 
@@ -135,7 +135,7 @@ source ~/groups/fslg_pws472/.bashrc
 conda activate angsd
 NGSadmix -likes lednia_PCA.beagle.gz -K 2 -o lednia_admix_K2 -P $SLURM_NPROCS
 ```
-When the job is finished, you will have a couple of new files in the `angsd` directory. `lednia_admix_K2.fopt.gz` is a gzipped file that contains the estimated allele frequencies for each population for each locus. `lednia_admix_K2.qopt` contains the estimated admixture proportions for each individual (one row per individual, in the same order as `bamlist.txt`, and one column per ancestral population).
+When the job is finished, you will see a few new files in the `angsd` directory. `lednia_admix_K2.fopt.gz` is a gzipped file that contains the estimated allele frequencies for each population for each locus. `lednia_admix_K2.qopt` contains the estimated admixture proportions for each individual (one row per individual, in the same order as `bamlist.txt`, and one column per ancestral population).
 
 ### 6. Create simple admixture plot
 Now we will create a simple admixture plot using our results from `NGSadmix`.

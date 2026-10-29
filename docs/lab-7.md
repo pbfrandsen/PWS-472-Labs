@@ -23,11 +23,11 @@ checklist:
     text: "Write and turn in your combined Labs 5-7 report"
 ---
 
-In Lab 6, we used many individuals to look at how genetic variation is distributed _among_ populations today. In this lab, we will use the genome of a single individual to look back in time.
+In Lab 6, we used many individuals to look at how genetic variation is distributed _among_ populations today. In this lab, we will use the genome of a single individual to evaluate demographic history over time.
 
-Every diploid individual carries two copies of each chromosome, one from each parent. If we trace those two copies back in time, at some point they _coalesce_ in a single ancestral copy. The time back to that common ancestor varies along the genome, because recombination has broken the chromosome into segments with different histories. Regions where the two copies are very different (many heterozygous sites) coalesced long ago, and regions where they are nearly identical coalesced recently. Coalescence happens faster when a population is small, so the distribution of these coalescence times tells us about how the effective population size (_N<sub>e</sub>_) has changed through time. The pairwise sequential Markovian coalescent (`PSMC`) uses the pattern of heterozygous sites along a single diploid genome to infer that history.
+Every diploid individual carries two copies of each chromosome, one from each parent. If we trace those two copies back in time, at some point they _coalesce_ in a single ancestral copy. The time to that common ancestor varies along the genome, because recombination has broken the chromosome into segments with different histories. Regions where the two copies are very different (many heterozygous sites) coalesced longer ago, and regions where they are nearly identical coalesced recently. Coalescence happens faster when a population is small, so the distribution of these coalescence times tells us about how the effective population size (_N<sub>e</sub>_) has changed through time. The pairwise sequential Markovian coalescent (`PSMC`) uses the pattern of heterozygous sites along a single diploid genome to infer that history.
 
-We will run `PSMC` on one female nymph from Skillet Glacier, **SG_04**, using the same chromosome 4 (`LtChr4`) data from Lab 6. (We use a female because stoneflies have an XO sex-determination system, so males have only one copy of the X chromosome. That doesn't matter for `LtChr4`, which is an autosome, but it would matter for the X.) In the full study (collaborative unpublished work), `PSMC` was run on the whole genome of all 24 individuals. Using only one chromosome keeps this lab fast, but it also gives `PSMC` much less information, so keep that in mind when you interpret your plot.
+We will run `PSMC` on one female nymph from Skillet Glacier, **SG_04**, using the same chromosome 4 (`LtChr4`) data from Lab 6. (We use a female because stoneflies have an XO sex-determination system, so males have only one copy of the X chromosome. That doesn't matter for `LtChr4`, which is an autosome, but it would matter for the X.) In the full study, we ran `PSMC` on the whole genome for each of the 24 individuals. Using only one chromosome keeps this lab fast, but it also gives `PSMC` much less information, so keep that in mind when you interpret your plot.
 
 The first thing you'll want to do is create a `lab7` directory in your `~/nobackup/archive` directory. Change directories into your newly created `lab7` directory. Then copy the `genome` directory and the SG_04 `BAM` file (and its `.bai` index) from `~/groups/fslg_pws472/nobackup/archive/lab6_lednia` into your new `lab7` directory.
 ```
@@ -44,8 +44,8 @@ cd jobs
 
 The commands below do three things:
 
-1. `bcftools mpileup` and `bcftools call` look at all of the reads covering each position of `LtChr4` and decide whether SG_04 is homozygous or heterozygous at that position.
-2. `vcfutils.pl vcf2fq` turns those calls into a single "diploid consensus" sequence, using IUPAC ambiguity codes for heterozygous sites. Positions with too little or too much coverage are masked.
+1. `bcftools mpileup` and `bcftools call` examine the reads covering each position of `LtChr4` and decide whether SG_04 is homozygous or heterozygous at that position.
+2. `vcfutils.pl vcf2fq` turns those calls into a single "diploid consensus" sequence, using IUPAC ambiguity codes for heterozygous sites. Positions with too little or too much coverage are not used.
 3. `gzip` compresses the output.
 
 The `-d` parameter is the minimum depth, which should be about 1/3 of the average depth of coverage, and `-D` is the maximum depth, which should be about twice the average depth of coverage. Very low depth makes it hard to see both alleles at a heterozygous site, and unusually high depth often indicates collapsed repeats, where reads from several copies of a repeat pile up in one place. SG_04 has an average depth of about 23x on `LtChr4` (after duplicates are removed), so we will use `-d 8` and `-D 46`.
@@ -83,7 +83,7 @@ module load psmc
 module load texlive
 psmc_plot.pl -p -u 2.8e-09 -g 1.5 SG_04_psmc SG_04.psmc
 ```
-This creates `SG_04_psmc.pdf` (and `SG_04_psmc.eps`). The x-axis is time before the present in years, on a log scale, and the y-axis is the effective population size. Read the plot from right (long ago) to left (recently).
+This creates `SG_04_psmc.pdf` (and `SG_04_psmc.eps`). The x-axis is time before the present in years, on a log scale, and the y-axis is the effective population size. Read the plot from right (further in the past) to left (more recent).
 
 ### 4. Download the plot with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
@@ -92,7 +92,7 @@ See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
 #### 📝 Lab Write-up (combined with Labs 5 and 6)
 
-This lab completes the combined write-up for Labs 5-7. For the Lab 7 part, consider the following:
+This is the final lab for the combined write-up for Labs 5-7. For the Lab 7 part, consider the following:
 
 - Describe your `PSMC` curve. When was the effective population size of this lineage at its largest? When did it decline?
 - In the full study, which used the whole genome, the `PSMC` curves of all 24 individuals followed a similar pattern. _N<sub>e</sub>_ peaked at about 250,000 roughly one million years ago, declined to about 80,000 by roughly 100,000 years ago, then rose and fell again between 100,000 and 10,000 years ago. How does your curve compare? What parts are similar, and what parts differ?
@@ -101,12 +101,12 @@ This lab completes the combined write-up for Labs 5-7. For the Lab 7 part, consi
 - The Teton Range was heavily glaciated during the last glacial period, and the glaciers retreated after about 15,000 years ago. `PSMC` has little power in the most recent ~10,000-20,000 years. What does that mean for using `PSMC` to understand how recent warming and glacier loss are affecting _L. tetonica_? What other data or methods could address that?
 - **Optional:** If you have time, repeat steps 1-3 for a Wind Cave individual (for example, WC_05) and compare the two curves. You will need to copy its `BAM` file, and adjust `-d` and `-D` for its depth of coverage (WC_05 has about 17x on `LtChr4`).
 
-**Putting the combined report together.** Turn in one report for Labs 5, 6, and 7 (triple the amount of points and triple the length). Organize it as a single study of _L. tetonica_ rather than three separate reports:
+**Putting the combined report together.** Turn in one report for Labs 5, 6, and 7 (triple the amount of points). Organize it as a single study of _L. tetonica_ rather than three separate reports:
 
 - **Introduction:** one introduction to _L. tetonica_, why it is a conservation concern, and the questions that the three labs address.
 - **Methods and Results:** a section for each lab, with clear methods (including the commands and a short explanation of what each piece of software does) and all of your tables and figures.
 - **Discussion:** answer the questions from each lab, and then tie them together:
-  - Labs 6 and 7 mapped reads to the chromosome-level reference genome. What would have been harder, or impossible, if you had used one of the class contig assemblies from Lab 5 as the reference instead? What if you had used the 15x assembly?
+  - Why was a genome assembly necessary for this work? How did it set up the downstream analyses?
   - Together, what do population structure (Lab 6) and long-term population size (Lab 7) tell you about the history of _L. tetonica_ and about how it should be managed as its glaciers disappear?
 
 </div>
