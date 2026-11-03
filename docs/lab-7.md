@@ -2,8 +2,8 @@
 layout: lab
 lab_num: 7
 title: "Demographic Histories with PSMC"
-blurb: "Reconstruct the population size history of the Teton meltwater stonefly from a single resequenced genome using the pairwise sequential Markovian coalescent."
-keywords: "psmc demographic history pairwise sequential markovian coalescent bcftools samtools mpileup population size lednia tetonica stonefly glaciation"
+blurb: "Reconstruct the population size history of the Teton meltwater stonefly from a single resequenced genome using the pairwise sequential Markovian coalescent, then compare the joint site frequency spectrum of two populations to simulated histories."
+keywords: "psmc demographic history pairwise sequential markovian coalescent bcftools samtools mpileup population size site frequency spectrum sfs 2d sfs realsfs fst gene flow population split lednia tetonica stonefly glaciation"
 # Checklist ids are the localStorage keys for student progress.
 # Never renumber an existing id; give new items a new, unused id.
 checklist:
@@ -17,8 +17,12 @@ checklist:
     text: "Run single PSMC analysis"
   - id: 4
     text: "Generate PSMC plot"
+  - id: 8
+    text: "Build the 2D site frequency spectrum with sfs.job"
+  - id: 9
+    text: "Compare your spectrum to Models A, B, and C"
   - id: 6
-    text: "Download PSMC plot"
+    text: "Download your PSMC and SFS plots"
   - id: 7
     text: "Write and turn in your combined Labs 5-7 report"
 ---
@@ -28,6 +32,8 @@ In Lab 6, we used many individuals to look at how genetic variation is distribut
 Every diploid individual carries two copies of each chromosome, one from each parent. If we trace those two copies back in time, at some point they _coalesce_ in a single ancestral copy. The time to that common ancestor varies along the genome, because recombination has broken the chromosome into segments with different histories. Regions where the two copies are very different (many heterozygous sites) coalesced longer ago, and regions where they are nearly identical coalesced recently. Coalescence happens faster when a population is small, so the distribution of these coalescence times tells us about how the effective population size (_N<sub>e</sub>_) has changed through time. The pairwise sequential Markovian coalescent (`PSMC`) uses the pattern of heterozygous sites along a single diploid genome to infer that history.
 
 We will run `PSMC` on one female nymph from Skillet Glacier, **SG_04**, using the same chromosome 4 (`LtChr4`) data from Lab 6. (We use a female because stoneflies have an XO sex-determination system, so males have only one copy of the X chromosome. That doesn't matter for `LtChr4`, which is an autosome, but it would matter for the X.) In the full study, we ran `PSMC` on the whole genome for each of the 24 individuals. Using only one chromosome keeps this lab fast, but it also gives `PSMC` much less information, so keep that in mind when you interpret your plot.
+
+`PSMC` follows a single lineage back in time, so it can't tell us when two populations split or whether they have exchanged migrants since. At the end of this lab, we will turn to that question with the joint site frequency spectrum of the Skillet Glacier and Wind Cave samples from Lab 6.
 
 The first thing you'll want to do is create a `lab7` directory in your `~/nobackup/archive` directory. Change directories into your newly created `lab7` directory. Then copy the `genome` directory and the SG_04 `BAM` file (and its `.bai` index) from `~/groups/fslg_pws472/nobackup/archive/lab6_lednia` into your new `lab7` directory.
 ```
@@ -85,7 +91,45 @@ psmc_plot.pl -p -u 2.8e-09 -g 1.5 SG_04_psmc SG_04.psmc
 ```
 This creates `SG_04_psmc.pdf` (and `SG_04_psmc.eps`). The x-axis is time before the present in years, on a log scale, and the y-axis is the effective population size. Read the plot from right (further in the past) to left (more recent).
 
-### 4. Download the plot with `scp` or similar.
+### 4. Build the joint site frequency spectrum of two populations
+
+The _site frequency spectrum_ (SFS) counts how common each variant is in a sample: how many sites have a variant at 1 copy, 2 copies, 3 copies, and so on. With two populations, we can build a _joint_ (2D) SFS: a table of how many sites have `i` copies of a variant in Skillet Glacier and `j` copies in Wind Cave. Each population has 6 diploid individuals, or 12 copies of each chromosome, so `i` and `j` each run from 0 to 12. The shape of this table depends on the history of the two populations (when they split, how large they were, and how many migrants they exchanged), which is why it is the starting point for most methods that infer the history of multiple populations, such as `dadi`, `moments`, and `fastsimcoal`.
+
+The job file and the files you need for the next step are ready in a shared `sfs` folder. Copy it into your `lab7` directory:
+```
+cd ~/nobackup/archive/lab7
+cp -r ~/groups/fslg_pws472/nobackup/archive/lab6_lednia/sfs ./
+cd sfs
+```
+Take a look at the job file with `cat sfs.job`. It uses the twelve `LtChr4` `BAM` files from Lab 6 (reading them from the shared folder) and:
+
+1. makes one list of `BAM` files per population,
+2. runs `ANGSD` with `-doSaf 1` to calculate _site allele frequency_ likelihoods for every site on `LtChr4` (not just the SNPs), one population at a time,
+3. runs `realSFS` to estimate the 2D SFS from those likelihoods (written to `SG_WC.2dsfs`),
+4. uses the 2D SFS to estimate F<sub>ST</sub> between the two populations (written to `SG_WC.fst.txt`), and
+5. plots your 2D SFS next to three simulated spectra (written to `sfs_2d_comparison.png`).
+
+Submit it:
+```
+sbatch sfs.job
+```
+It took about 5 minutes when I tested it. When it is finished, look at the F<sub>ST</sub> estimate:
+```
+cat SG_WC.fst.txt
+```
+The first number is the unweighted F<sub>ST</sub> (an average of per-site values, which is pulled toward zero by the many sites with almost no variation) and the second is the weighted F<sub>ST</sub>, which is the one usually reported.
+
+### 5. Compare your spectrum to three simulated histories
+
+Download `sfs_2d_comparison.png` and open it. The first panel is your data. Each square is one combination of allele counts, and its color shows how many sites on `LtChr4` fall into it (on a log scale). Because we don't have an outgroup to tell us which allele is ancestral, the spectrum is _folded_: each site is counted by its less common (minor) allele, which is why only the lower-left triangle is filled. A few places in the plot are worth paying attention to:
+
+- The **bottom row** and **left column** are variants found in only one population (_private_ variants).
+- The **interior** of the triangle holds variants that are found in both populations (_shared_ variants).
+- The **top-left corner** holds sites where the two populations are completely different: every Wind Cave copy carries one allele and every Skillet Glacier copy carries the other (_fixed differences_).
+
+The other three panels are spectra simulated with `moments` under three different histories for these two populations, each scaled to the same number of variable sites as your data. One history is a split long ago with no gene flow since, one is a split followed by a moderate, continuing exchange of migrants, and one is a split followed by a lot of gene flow. Which model is which is up to you to work out. Think about what each history would do to the number of private variants, shared variants, and fixed differences, and then decide which model looks most like your data.
+
+### 6. Download the plots with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
 <div class="writeup-box" markdown="1">
@@ -99,6 +143,7 @@ This is the final lab for the combined write-up for Labs 5-7. For the Lab 7 part
 - Your analysis used one chromosome, about 7% of the genome. Why would `PSMC` estimates from a single chromosome be noisier than estimates from the whole genome? (_Hint:_ think about how many independent segments with different coalescence times there are along one chromosome compared to all of them.)
 - How would your plot change if the true mutation rate of stoneflies were twice the _Drosophila_ rate? If the generation time were 1 year instead of 1.5? Which axes would shift, and in which direction?
 - The Teton Range was heavily glaciated during the last glacial period, and the glaciers retreated after about 15,000 years ago. `PSMC` has little power in the most recent ~10,000-20,000 years. What does that mean for using `PSMC` to understand how recent warming and glacier loss are affecting _L. tetonica_? What other data or methods could address that?
+- For the site frequency spectrum, which of Models A, B, and C looks most like your data? Which history do you think each model represents, and what features of the plots (private variants, shared variants, fixed differences) led you to that conclusion? Does your choice fit with your F<sub>ST</sub> estimate and your admixture results from Lab 6? Choosing by eye only gets us so far: two different histories can produce very similar spectra. How could you decide between two models more formally?
 - **Optional:** If you have time, repeat steps 1-3 for a Wind Cave individual (for example, WC_05) and compare the two curves. You will need to copy its `BAM` file, and adjust `-d` and `-D` for its depth of coverage (WC_05 has about 17x on `LtChr4`).
 
 **Putting the combined report together.** Turn in one report for Labs 5, 6, and 7 (triple the amount of points). Organize it as a single study of _L. tetonica_ rather than three separate reports:
@@ -107,6 +152,6 @@ This is the final lab for the combined write-up for Labs 5-7. For the Lab 7 part
 - **Methods and Results:** a section for each lab, with clear methods (including the commands and a short explanation of what each piece of software does) and all of your tables and figures.
 - **Discussion:** answer the questions from each lab, and then tie them together:
   - Why was a genome assembly necessary for this work? How did it set up the downstream analyses?
-  - Together, what do population structure (Lab 6) and long-term population size (Lab 7) tell you about the history of _L. tetonica_ and about how it should be managed as its glaciers disappear?
+  - Together, what do population structure (Lab 6), long-term population size, and the history of the split between Skillet Glacier and Wind Cave (Lab 7) tell you about the history of _L. tetonica_ and about how it should be managed as its glaciers disappear?
 
 </div>
