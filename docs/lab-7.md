@@ -129,6 +129,10 @@ Download `sfs_2d_comparison.png` and open it. The first panel is your data. Each
 
 The other three panels are spectra simulated with `moments` under three different histories for these two populations, each scaled to the same number of variable sites as your data. One history is a split long ago with no gene flow since, one is a split followed by a moderate, continuing exchange of migrants, and one is a split followed by a lot of gene flow. Which model is which is up to you to work out. Think about what each history would do to the number of private variants, shared variants, and fixed differences, and then decide which model looks most like your data.
 
+These are the three model spectra that appear next to your data in `sfs_2d_comparison.png`:
+
+![Folded 2D site frequency spectra simulated under three histories for Skillet Glacier and Wind Cave, labelled Model A, Model B, and Model C](assets/img/lab7_sfs_models.png)
+
 ### 6. Download the plots with `scp` or similar.
 See [here](https://rc.byu.edu/wiki/?id=Transferring+Files) for more details.
 
